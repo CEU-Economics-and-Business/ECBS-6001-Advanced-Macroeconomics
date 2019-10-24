@@ -1,0 +1,685 @@
+% preamble.tex
+= Lecture 18: A model of new products =
+ 
+== Outline ==
+* Today we apply continuous-time dynamic programming to a model of endogenous growth.
+* We will use
+  * dynamic programming with a jump process 
+  * differential equations
+  * steady-state properties
+* The application is also heavy in general equilibrium. 
+  * aggregation of individual decisions
+  * resource constraints 
+  * endogenous prices
+
+== Outline ==
+* Today we will study a model where growth occurs through an increase in the number of products.
+* Product innovation is a source of technical progress.
+  * Most of income differences across countries are due to differences in productivity.
+* We will make use of the Dixit--Stiglitz model of monopolistic competition.
+
+== Innovation ==
+* Innovation is a conscious economic activity.
+  * In contrast to exogenous technical progress.
+  * Responds to profit incentives of innovators.
+* Process innovation reduces production costs of existing products. Product innovation entails coming up with new products.
+  * We focus on product innovation.
+* Horizontal innovation leads to products with new functions. Vertical innovation serves similar function at higher quality. 
+* Innovation ("idea") may or may not be replicable.
+  * We begin with a setup with fully private benefits.
+  * Then discuss the case of knowledge spillovers.
+
+== Product innovation ==
+* Firms spend on R&D to come up with blueprints of products.
+* Only products for which blueprints exist can be produced.
+* The holder of a blueprint obtains a monopoly over producing that product.
+  * Patent protection
+  * Any small cost of imitation prevents it in equilibrium.
+  * Later we will study imitation more generally.
+* Firms do two things:
+  1. develop blueprints
+  2. produce from existing blueprints
+
+= Static equilibrium =
+
+== Structure of the economy ==
+* Firms produce goods based on existing blueprints.
+ * using labor
+* They also employ researchers to develop new blueprints
+  * same type of labor
+  * demand for funds
+* Because of IPR protection, firms make profits.
+* Workers earn wages and hold a portfolio of all firms (stock market).
+* They decide how much to consume and how much to save.
+  * supply of funds
+
+== Static equilibrium ==
+* We begin by characterizing the equilibrium at a given point in time.
+  * production of existing products
+* We then move on to dynamic decisions
+  * development of new products
+
+== Consumers ==
+* Consumers value all existing products symmetrically.
+ * No obsolescence.
+* Suppose $N(t)$ products exist at time $t$.
+* Composite consumption good:
+\[
+D = \left[ 
+  \sum_{i=1}^{N(t)} x_i^\alpha
+\right]^{1/\alpha} \,\,\, 0<\alpha<1
+\]
+* This is a constant-elasticity-of-substitution utility function a la Dixit and Stiglitz.
+* Elasticity of substitution is $\varepsilon = 1/(1−\alpha)>1$.
+  * What does $\varepsilon > 1$ mean?
+
+== Love of variety ==
+* Suppose each variety costs $p_i = p$.
+* Total spending on $n$ goods: $Npx = E$, so that $x = E/(pN)$.
+* What utility does the consumer achieve?
+\[
+D = 
+\left[ 
+  \sum_{i=1}^N x^\alpha
+\right]^{1/\alpha}
+ = 
+\frac Ep
+\left[ 
+  \sum_{i=1}^N N^{-\alpha}
+\right]^{1/\alpha}
+= \frac Ep N^{(1-\alpha)/\alpha}
+􏰙\]
+* For given income $E$ and prices p, utility increases in N.
+* Because $x_i$s are imperfect substitutes of one another, it is
+better to have a little of each than much of one.
+* Consumption of non-existent varieties is 0. The convexity of
+preferences dislikes zeros.
+* This is the love-of-variety feature of preferences.
+
+== Love of variety ==
+* Alternatively, we can express love of variety in the expenditure function.
+* The minimum cost of obtaining one unit of utility,
+\[
+P = \left[
+  \sum_{i=1}^N p^{1-\varepsilon}
+\right] ^{1/(1-\varepsilon)}
+ = p N^{1/(1-\varepsilon)}
+\]
+is decreasing in $N$.
+* We can think of the price of non-existent varieties as $\infty$.
+* When the product becomes available, its price falls from $\infty$ to
+$p$.
+* An increase in $N$ then reduces the aggregate price index.
+* Hence indirect utility,
+\[
+u = \frac EP = \frac Ep N^{(1−\alpha)/\alpha}
+\]
+is increasing in $N$.
+
+== Firms ==
+* Each product is produced with labor only: $x_i = l_i$.
+* The unitary labor requirement is not restrictive. Why? 
+* The demand for product $i$:
+\[
+x_i = E \frac
+  {p_i^{-\varepsilon}}
+  {\sum_{j=1}^N p_j^{1-\varepsilon}}
+\]
+
+== Market structure ==
+* Each firm has a monopoly over its blueprint.
+* There are many firms so that each firm takes aggregate prices and quantities as given.
+* Monopolistic competition.
+* Demand for product i is isoelastic with elasticity ε:
+\[
+x_i = E \frac
+  {p_i^{-\varepsilon}}
+  {\sum_{j=1}^N p_j^{1-\varepsilon}}
+  = A p_i^{-\varepsilon}
+\]
+ * The firm takes $A$ as given but maximizes over $p_i$.
+* Markup pricing
+\[
+p_i = \frac {\varepsilon}{\varepsilon - 1} w
+= \frac w\alpha
+\]
+
+== Choice of numeraire ==
+* We normalize aggregate expenditure to $E \equiv 1$.
+* This is a weird choice of numeraire but will prove convenient later.
+  * We are free to fix any one price in each time period to whatever value we want.
+  * The price need not be 1, need not even be constant. 
+  * So we pick $P = 1/D$ so that $E = P D = 1$.
+
+== Firm profits ==
+* A fraction α of revenue goes to labor, (1 − α) goes to profits. πi =(1−α)pixi
+* In symmetric equilibrium, each firm sells 1/N. πi = 1−α.
+N
+* Note that 􏰌ow profits tend to zero as N increases without bound.
+* Will R&D be sustained in the long run?
+
+== Determining wages ==
+* The wagebill of the firm is
+wli = α .
+ N * Aggregating across all N firms,
+wLm = α,
+where Lm is the amount of labor in production.
+* So wages are
+w=α. Lm
+
+== Checklist ==
+So far we have determined
+* how consumers value variety
+* how firms price their products
+* what is the total labor demand in production
+
+= Dynamic decisions =
+
+= Supply of funds =
+
+== Consumption smoothing ==
+* Consumer has log utility 􏰕∞
+U =
+exp(−ρt)lnD(t)dt.
+t=0
+* Can save and borrow at interest rate r:
+a ̇ = ra + y − c. * The corresponding Bellman:
+ρV (a, y, r) = max {ln c + Va(a, y, r)(ra + y − c)} c
+
+== Deriving the Euler equation ==
+* The FOC for optimal c:
+1 = Va(a,y,r).
+c
+* Taking logs and differentiating wrt time −cˆ= Vaa(ra+y−c)
+Va
+(xˆ denotes x ̇/x)
+* Differentiating through the Bellman to express Va:
+ρVa =Vaa·[ra+y−c]+Va ·r
+* Substituting in Vaa:
+cˆ = r − ρ
+
+== Nominal vs real interest rate? ==
+* All this referred to an economy in which there is no in􏰌ation. * If there is in􏰌ation,
+a ̇ = ra + y − pc.
+* And the FOC becomes
+1 = pVa(a,y,r,p). c
+
+== Exercise ==
+* Derive the Euler equation in this economy.
+* What is the optimal rate of growth for consumption? * What do you need to know about p(t)?
+
+== The Euler equation ==
+* The Euler equation
+Dˆ = r − Pˆ − ρ.
+* Dˆ+Pˆisthegrowthrateofexpenditure,E=PD.
+* But expenditure is constant, E ≡ 1.
+* The interest rate equals the discount rate
+r = ρ.
+* This completely characterizes the supply side of financial markets.
+
+= Demand for funds =
+
+== The decision to innovate ==
+* Take a firm with n products.
+* n is a firm-level state variable.
+* The firm takes aggregates, N and Lm as given. * The firm can raise capital at rate r = ρ.
+* We next analyze the R&D decision.
+
+== Research and development ==
+* R&D is costly and random.
+* Successes arrive with a Poisson process.
+* The arrival rate depends on R&D expenditure.
+* So that a new product arrives with rate λ, the firm has to hire aλ workers.
+* Again, λ is an instantaneous arrival rate.
+* R&D expenditure aλ is a 􏰌ow.
+* Past expenditure and past success do not matter.
+* Let us write down the Bellman equation for the value of the firm.
+
+== The value of a firm ==
+ * The Bellman equation
+ρV (n, N, Lm) = max n − aλ
+􏰑1−α α λ N Lm
+  +λ[V(n+1,N,Lm)−V(n,N,Lm)]
++ EdV(n,N,Lm)}
+dt
+* The state variables are n, N and Lm. Only n is affected by the firm.
+* The opportunity ("financing") cost of the firm equals
+* 􏰌ow profits:
+* operative profits
+* minus the cost of R&D
+* capital gains:
+* the invention of a new product
+* change in the value of existing products
+
+== Solution ==
+* Guessthatthevalueislinearinn,V(n,N,Lm)=nv(N,Lm).
+􏰑1−αα 􏰒 ρnv(N, Lm) = max n − aλ + λv(N, Lm) + nv ̇
+  * TheFOCforλis with equality if λ > 0.
+Lm
+λ N Lm αa ≥v(N,Lm),
+ * Simplify to
+* This links N, Lm, and v.
+ρv(N, Lm) = 1 − α + v ̇. N
+
+== Innovation and growth ==
+* Note that the FOC did not pin down λ.
+* This because of the linearity of both the benefit and the cost
+of innovation.
+* Would change with convex costs of innovation.
+* Suppose firm i innovates with rate λi, using aλi R&D workers. * This leads to a new product with arrival rate λi.
+
+== Aggregate innovation ==
+* The arrival rate of the first new product across all firms is 􏰔 λi ≡ Λ.
+i
+* The overall number of R&D workers is 􏰔 aλi = aΛ.
+i
+* Even if λi is indeterminate, aggregate innovation Λ will be
+pinned down in equilibrium.
+* Because new products arrive with Λ, the growth rate of N is
+EdN/dt = Λ. NN
+
+== Dynamic equilibrium ==
+* We now characterize the dynamic equilibrium.
+* The key is to pin down the allocation of labor to its two uses:
+1. production: Lm 2. R&D: aΛ
+* Resource constraint for labor
+Lm + aΛ = L,
+ * or
+N ̇ = L − L m . a
+ * Note that whenever N ̇ > 0, Lm = αa/v, so that
+N ̇ = L − α . av
+
+== Long-run growth ==
+* We first show that there is no long-run growth in this economy.
+* This is because the incentive to innovate disappears as N
+grows large.
+* Suppose
+N > N ̄ ≡ (1 − α)L αaρ
+and there is no R&D.
+* Then both N and Lm are constant, so is v(N,Lm).
+* From the Bellman equation,
+v(N,L)= 1−α. ρN
+* But because N > N ̄, this is indeed smaller than the cost of innovation αa/L.
+* So no innovation is a unique equilibrium.
+
+== Steady state ==
+* The * * * *
+steady-state N (and hence steady-state productivity) is increasing in country size L
+increasing in profit share (1 − α) decreasing in R&D cost a decreasing in discount rate ρ
+D (1−α)/α 􏰗 (1 − α)L 􏰘(1−α)/α
+L=N →αaρ m
+
+== Phase diagram ==
+
+== Recipe ==
+3. Constant interest rate: $r=\rho$
+6. Symmetric profits: $\pi = (1-\alpha)/N$
+5. Wage equation: $w = \alpha/L_m$
+1. Firm valuation: $\rho v = \pi + \dot v$
+2. Optimal R\&D: $v\le aw $
+4. Resource constraint: $L_m+a\dot N = L$
+
+
+== Dynamic equilibrium ==
+* We now characterize the dynamic equilibrium.
+* The key is to pin down the allocation of labor to its two uses: 
+    1. production: $L_m$
+    2. R\&D: $a\Lambda$
+* Resource constraint for labor
+\[
+L_m + a\Lambda  = L,
+\]
+* or
+\[
+\dot N = \frac{L-L_m}{a}.
+\]
+* Note that whenever $\dot N>0$, $L_m = \alpha a/v$, so that
+\[
+\dot N = \frac{L}{a} - \frac{\alpha}{v}.
+\]
+
+== Long-run growth ==
+* We first show that there is no long-run growth in this economy.
+* This is because the incentive to innovate disappears as $N$ grows large.
+* Suppose 
+\[
+N>\Bar N\equiv \frac{(1-\alpha)L}{\alpha a \rho}
+\]
+and there is no R\&D.
+* Then both $N$ and $L_m$ are constant, so is $v(N,L_m)$.
+* From the Bellman equation,
+\[
+v(N,L) = \frac{1-\alpha}{\rho N}.
+\]
+* But because $N>\Bar N$, this is indeed smaller than the cost of innovation $\alpha a/L$.
+* So no innovation is a unique equilibrium.
+
+== Characterizing the dynamics ==
+We collapse the six equations of the "recipe" into two.
+=== Labor market clearing + wage equation + optimal R\&D ===
+\[
+\dot N = \max\left\{0, \frac La - \frac\alpha v\right\}
+\]
+=== Bellman equation ===
+\[
+\dot v = \rho v - \frac{1-\alpha}{N}
+\]
+
+== Steady state ==
+* The steady state is such that both $\dot N$ and $\dot v$ are zero.
+* Steady-state $N$ is
+\[
+N_{ss} = \frac{(1-\alpha)L}{\alpha\rho a}.
+\]
+* Steady-state productivity (output per worker) is
+\[
+\frac{D}{L_m} = N^{(1-\alpha)/\alpha} \to \left(\frac{(1-\alpha)L}{\alpha a \rho}\right)^{(1-\alpha)/\alpha}.
+\]
+    * (This only includes manufacturing, not R\&D.)
+* Both are
+ * increasing in country size $L$
+ * increasing in profit share $(1-\alpha)$
+ * decreasing in R\&D cost $a$
+ * decreasing in discount rate $\rho$
+
+
+
+= Knowledge spillovers = 
+== Knowledge spillovers ==
+* Now suppose that R\&D has external benefits to other researchers.
+* In particular, let the cost of R\&D decrease with the number of existing products, $N$, $a/N$.
+* This changes
+    1. the incentive to innovate
+    2. the resource requirements of innovation
+    
+== The new Bellman ==
+* The new Bellman equation:
+\[
+\rho nv(N,L_m) = \max_{\lambda}\left\{
+\frac{1-\alpha}{N}  n - \frac {\alpha a}{NL_m}\lambda+
+\lambda v(N,L_m)
++n\dot v
+\right\}
+\]
+* First-order condition
+\[
+\frac {\alpha a}{NL_m} = v
+\]
+* The rate of return on innovation
+\[
+r_{R\&D} = \frac{1-\alpha}{\alpha}\frac{L_m}{a} - \hat N - \hat L_m.
+\]
+    * Profits per fixed cost are now independent of $N$.
+    * There are capital losses because innovation becomes ever cheaper.
+
+== The new resource constraint ==
+If aggregate innovation is $\Lambda$, it takes up $\Lambda a/N$ workers.
+\[
+L_m + \Lambda \frac aN = L
+\]
+
+== Balanced growth ==
+* Suppose that this economy attains a balanced growth path with constant growth rate $g=\hat N$.
+* "Balanced" means that labor allocations ($L_m$) are constant.
+* We then verify that this is an equilibrium.
+...
+* From the Bellman equation for firm value
+\[
+\rho = \frac{1-\alpha}{\alpha}\frac{L_m}{a} - g.
+\]
+* From the resource constraint,
+\[
+L_m + ag  = L.
+\]
+
+== Solution ==
+\begin{align*}
+L_m &= \alpha(L+a\rho)\\
+g &= \frac{1-\alpha}{a}L-\alpha\rho
+\end{align*}
+* Indeed, as long as $(1-\alpha)L/a>\alpha\rho$, balanced growth is an equilibrium.
+* The growth rate is 
+    * increasing in the profit share $(1-\alpha)$
+    * increasing in country size $L$ (more on this later)
+    * decreasing in the cost of R\&D $a$
+    * decreasing in the discount rate $\rho$
+
+= Other ways to generate growth =
+== Other ways to generate growth ==
+* Knowledge spillovers reduce the cost of innovation so that profit ''per cost'' do not vanish.
+* We have other ways to generate growth:
+    * In a different demand system / competition, profits may not vanish. (See quality competition later.)
+    * If innovation costs are in the final good rather than in labor units, they "mechanically" get lower with development:
+    \[
+    P = N^{(\alpha-1)/\alpha}.
+    \]
+    * (This is also an external benefit of R\&D but it is ''pecuniary''.)
+    * If population grows, firms keep doing R\&D. This may even lead to growth in output ''per capita''. (See later.)
+    
+
+= Policy and welfare = 
+== Policies ==
+* We want to see if policy has an effect on growth.
+* We consider two policies:
+    1. an R\&D subsidy
+    2. a production subsidy
+    
+== R\&D subsidy ==
+* The government pays a fraction $\phi$ of research expenses.
+* This is financed by a lump-sum tax.
+* This changes the incentive to innovate,
+\[
+\frac {\alpha a(1-\phi)}{NL_m} = v,
+\]
+* and the Bellman equation
+\[
+\rho = \frac {(1-\alpha)L_m}{\alpha a(1-\phi)} - g.
+\]
+== Solution ==
+\begin{align*}
+L_m &= \alpha[L+a(1-\phi)\rho] < L_m(\text{no subsidy})\\
+g &= \frac{1-\alpha}{a(1-\phi)}L-\alpha\rho > g(\text{no subsidy})
+\end{align*}
+* An R\&D subsisdy increases growth and decreases manufacturing employment/output.
+
+== Production subsidy ==
+* Manufacturers receive an ad valorem subsidy of $\phi_x$.
+* Their aggregate revenue is hence $1+\phi_x$,
+* profit per variety is \[(1+\phi_x)(1-\alpha)/N.\]
+* This seems to raise the profitability of R\&D.
+
+== Production subsidy ==
+* But note that the wage equation changes as well,
+\[
+w = (1+\phi_x)\alpha/L_m.
+\]
+* So the ''returns'' to R\&D are unchanged:
+\[
+\frac{(1+\phi_x)(1-\alpha)L_m}{(1+\phi_x)a\alpha N}.
+\]
+* Production subsidy raises prices and wages proportionally, so does not lead to any reallocation.
+
+
+== Welfare ==
+* Is the equilibrium growth rate $g$ ''optimal''?
+* We see that R\&D subsidies can increase the growth rate -- should they be employed?
+...
+* We answer that by solving the benevolent social planners problem.
+* The social planner maximizes discounted utility subject to technology contraints.
+    * (Prices and markets do not matter.)
+* We begin with the case without knowledge spillovers.
+
+
+== Static optimum ==
+* First note that the static equilibrium is optimal -- despite imperfect competition.
+* Given $L_m$ workers and $N$ existing varieties, the social planner would like to allocate $L_m/N$ workers to each -- just as in equilibrium.
+* Because markups are symmetric, they do not involve any distrotion -- relative prices across firms are unchanged.
+
+== Dynamic optimum ==
+* Aggregate output of the final good is
+\[
+D = N^{(1-\alpha)/\alpha}L_m.
+\]
+* Per-period utility is 
+\[
+\ln D = \frac{1-\alpha}{\alpha}\ln N+\ln L_m.
+\]
+* The one state variable is $N$. 
+* Choice variable is $L_m$, or, equivalently, aggregate innovation $\Lambda$.
+
+== Bellman equation ==
+* The Bellman equation of the policy maker
+\begin{multline*}
+\rho V(N) = \max_{L_m}\left\{
+\frac{1-\alpha}{\alpha}\ln N+\ln L_m  \right. \\
+\left.+\frac{L-L_m}{a}\left[V(N+1)-V(N)\right]\right\}
+\end{multline*}
+...
+* We make the approximation 
+\[
+V(N+1) - V(N) \approx V'(N)
+\]
+so that we can use the envelope theorem. (Works for large $N$.)
+
+== Solution ==
+* The first-order condition for $L_m$ is
+\[
+\frac 1{L_m} = \frac{V'(N)}{a}.
+\]
+* Using the envelope theorem to determine $V'$,
+\[
+\rho V'(N) = \frac{1-\alpha}{\alpha N} + \dot N V'{}'(N).
+\]
+* Now introduce $v\equiv \alpha V'(N)$. The two equations can be rewritten as
+\begin{align*}
+L_m &= \frac {a\alpha}{v}\\
+\rho v &= \frac{1-\alpha}{N} + \dot v
+\end{align*}
+
+== Solution ==
+* Substituting in the resource constraint,
+\[
+\dot N = \frac La - \frac \alpha v.
+\]
+* And the Bellman equation
+\[
+\dot v = \rho v - \frac{1-\alpha}{N}.
+\]
+...
+* But notice that these are the same as the equilibrium conditions.
+* The equilibrium is hence efficient.
+
+
+== The case with knowledge spillovers ==
+* The social planner's Bellman now
+\begin{multline*}
+\rho V(N) = \max_{L_m}\left\{
+\frac{1-\alpha}{\alpha}\ln N+\ln L_m  \right. \\
+\left.+\frac{(L-L_m)N}{a}V'(N)\right\}
+\end{multline*}
+...
+* Guess that the value function is of the form
+\[
+V(N) = b_0 + b_1 \ln N.
+\]
+
+== Solution ==
+* Guess that the value function is of the form
+\[
+V(N) = b_0 + b_1 \ln N.
+\]
+* Then $V'(N) = b_1/N$ and
+\[
+L_m = \frac{a}{V'(N)N} = \frac{a}{b_1}
+\]
+is constant.
+* So is the growth rate
+\[
+\frac{\dot N}{N} = \frac{L-L_m}{a} = \frac La - b_1.
+\]
+* Verify that the Bellman equation holds for
+\[
+b_1 = \frac{1-\alpha}{\alpha \rho}
+\]
+and some (ugly) $b_0$.
+
+== Optimal growth ==
+* Substituting in $b_1$, optimal growth is
+\[
+g^* = \frac La - \frac{\alpha\rho}{1-\alpha}.
+\]
+* Notice that
+\[
+g^* = \frac g{1-\alpha}>g.
+\]
+* Equilibrium growth is ''inefficiently low''.
+* What is the intuition?
+
+== Discussion ==
+* We have endogenized ''technology'': companies invest in new technology just as they invested in physical capital in the Solow/Ramsey model.
+* But it has proven difficult to endogenize ''growth'': R\&D can also be subject to decreasing returns to scale.
+* We had to assume spillovers: the social returns to R\&D are higher than the private returns.
+* This model is not necessarily about ''endogenous growth'', but certainly about ''endogenous innovation'' and technology.
+* Innovation (and potentially growth) responds to taste and policy parameters and, notably, ''country size''.
+* Equilibrium growth is lower that optimal, there is room for policy.
+
+= Appendix =
+== CES review ==
+* Take the following CES utility function:
+\[
+u(x_1,x_2) = \left[x_1^\alpha+x_2^\alpha\right]^{1/\alpha},
+\]
+and define $\varepsilon=1/(1-\alpha)$, $\alpha=1-1/\varepsilon$
+* Maximize utility subject to prices $p_1$ and $p_2$:
+\[
+p_1x_1+p_2x_2 = E
+\]
+* What is the relative demand for $x_1$ and $x_2$?
+
+== Utility maximization ==
+* The marginal rate of substitution
+    \[
+    \frac{u_1}{u_2} = \frac{x_1^{\alpha-1}}{x_2^{\alpha-1}} = \left(\frac{x_1}{x_2}\right)^{-1/\varepsilon}
+    \]
+* In the optimum, this equals the relative price, $p_1/p_2$:
+\[
+\frac{x_1}{x_2} = \left(\frac{p_1}{p_2}\right)^{-\varepsilon}
+\]
+* The relative demand is loglinear in relative prices.
+    * The elasticity of substitution is constant at $\varepsilon$.
+
+== Cost minimization ==
+* In parallel, we can solve the cost minimization problem.
+* Minimize $E = p_1x_2+p_2x_2$ subject to $u(x_1,x_2)=u_0$.
+    * FOC:
+    \[
+    p_i = \lambda x_i^{\alpha-1}
+    \]
+\[
+E = u_0\left[p_1^{1-\varepsilon}+p_2^{1-\varepsilon}\right]^{1/(1-\varepsilon)}
+\]
+* The term
+\[
+P \equiv \left[p_1^{1-\varepsilon}+p_2^{1-\varepsilon}\right]^{1/(1-\varepsilon)}
+\]
+is the ''ideal price index''.
+
+
+== Markup pricing ==
+* Take a demand function $D(p)$ and a cost function $C(Q)$.
+* Maximize profit
+\[
+pD(p) - C[D(p)]
+\]
+* First-order condition
+\[
+D(p) + pD'(p) - C'[D(p)]D'(p) = 0
+\]
+* Divide by $pD'$ and rearrange
+\[
+\frac{p-C'[D(p)]}{p} = \frac{D(p)}{-pD'(p)} \equiv \frac 1\varepsilon.
+\]
+* Price--cost markup
+\[
+\frac{p}{C'[D(p)]} = \frac{\varepsilon}{\varepsilon-1}.
+\]
