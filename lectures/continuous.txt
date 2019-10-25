@@ -10,10 +10,11 @@ You will have applicable knowledge of
     * aggregation of heterogeneous agent models
 
 == Applications ==
-We will cover three applications:
+We will cover four applications:
  1. The expanding variety model of growth (Grossman and Helpman)
  2. The rising product quality model of growth (Aghion and Howitt)
  3. A firm-level model of innovation (Klette and Kortum)
+ 4. Growth and volatility (Koren and Tenreyro)
 
 = Outline=
 == Outline ==
@@ -44,7 +45,7 @@ We will cover three applications:
     * Prices are measured monthly, unemployment is reported weekly.
     * Full-population census is usually done every 10 years.
 ...
-* It is often useful to think about the "true" model first and then ask how it is measured.
+* It is often useful to think about the ``true" model first and then ask how it is measured.
 ...
 * Often, continuous-time math is simpler.
 
@@ -54,8 +55,8 @@ We will cover three applications:
   * We can define arbitrary intervals as we wish.
 * Continuous time forces you to think about flows and stocks carefully.
 
-== Example 1: "Bill Gates could buy Costa Rica" ==
-* ''Forbes'' reports that Bill Gates' net worth, \$50 billion, is higher than the GDP of Costa Rica, hence "Bill Gates could buy Costa Rica".
+== Example 1: ``Bill Gates could buy Costa Rica" ==
+* ''Forbes'' reports that Bill Gates' net worth, \$50 billion, is higher than the GDP of Costa Rica, hence ``Bill Gates could buy Costa Rica".
 * We, economists, know this is totally stupid: net worth is a ''stock'', GDP is a ''flow''.
 * But just in case:
     * In continuous time, the two actually have different units: GDP is measured in \$/year (or second), net worth is measured in \$.
@@ -117,13 +118,13 @@ y_t = \rho y_{t-1} + u_t
     * Say, unemployment next week depends on last week's number, but also on seasonality.
     * We can always increase the state space to include last year's number.
 ...
-* What if there are "news" about the future that are informative?
+* What if there are ``news" about the future that are informative?
     * Say, technological developments are reported in Science and this affects future GDP growth.
     * Again, we can include a state variable (or vector) to account for these news.
     * This works as long the news themselves have Markovian dynamics.
 ...
 * One can use Markovian tools for even inherently forward-looking phenomena.
-    * Say, the continuation value in a dynamic contract can be a state variable. (Sargent calls this "dynamic programming squared".)
+    * Say, the continuation value in a dynamic contract can be a state variable. (Sargent calls this ``dynamic programming squared".)
 
 
 
@@ -135,8 +136,8 @@ y_t = \rho y_{t-1} + u_t
 \[
 \Delta x_t = F(x_{t-1}).
 \]
-  * This is a special case of a first-order Markov process.
-  * Being first order is not restrictive. Why?
+* This is a special case of a first-order Markov process.
+* Being first order is not restrictive. Why?
 * Long-run stability, speed of converge etc.~can be characterized by certain properties of $F$.
 
 == Cobweb plot ==
@@ -186,7 +187,6 @@ f(x^*) = 0.
 
 == Stability ==
 * The local stability of the steady state depends on the derivative (''gradient'') of $f$.
-* (See Katrin's math course for details.)
 
 == Example 1: The Solow model ==
 * The law of motion for capital in the Solow model:
