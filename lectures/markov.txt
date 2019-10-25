@@ -69,7 +69,7 @@ P = \begin{bmatrix}
 = Continuous time =
 == Moving to continuous time ==
 * Let us now take $\Delta $ to 0.
-* The set of possible states is given, $S_1,...,S_N$.
+* The set of possible states is fixed, $S_1,...,S_N$.
 * What changes with $\Delta $ is the transition matrix: $P(\Delta )$.
 
 == Moving to continuous time ==
@@ -95,6 +95,12 @@ P_{ii}(\Delta ) = 1-\Lambda_i\Delta .
 P_{ij}(\Delta ) = \lambda_{ij}\Delta .
 \]
 * (In fact, any function of order $O(\Delta )$ will do.)
+\[
+P_{ii}(\Delta ) = \exp\left(-\Lambda_i\Delta \right).
+\]
+\[
+P_{ij}(\Delta ) = 1 - \exp\left(-\lambda_{ij}\Delta \right).
+\]
 
 
 == Transitions ==
@@ -107,7 +113,7 @@ P_{ij}(\Delta ) = \lambda_{ij}\Delta .
 * Note that $\lambda_{ij}$ is an arrival ''rate'', not a probability.
   * It can take any non-negative value, not just $[0,1]$.
 
-== The transition ''rate'' matrix ==
+== The transition ``rate" matrix ==
 * More generally, we know that $P(\Delta)-I$ is $O(\Delta)$.
 * This means that
 \[
@@ -355,8 +361,8 @@ Take the 3 different email servers and
 
 == Characterizing the Poisson process ==
 The two key characteristics of the Poisson process
-    1. No two events happen at the same time ("rare events").
-    2. The future arrival of events is independent of past events ("memoryless").
+    1. No two events happen at the same time (``rare events").
+    2. The future arrival of events is independent of past events (``memoryless").
 
 == Characterizing the Poisson process ==
 The Poisson process may arise
@@ -400,6 +406,15 @@ The Poisson process may arise
 * Take a Poisson processes with arrival $\lambda$ and a probability $p$.
 * Kill each arrival with probability $1-p$.
     * The new process is Poisson with arrival $p\lambda$.
+
+== Notation ==
+* Let $J(t)$ denote the number of arrivals of a standard Poisson process between time $0$ and time $t$.
+* For any $t$, $J(t) \sim \text{Poisson(t)}$.
+* Notation for a jump process of arrival $\lambda$ and jumps of size $x$:
+\[
+x J(\lambda t)
+\]
+* Graph.
 
 == Poisson representation of Markov chains ==
 * Think of a Markov chain with $N$ states.
