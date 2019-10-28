@@ -130,7 +130,8 @@ y_t = \rho y_{t-1} + u_t
 
 = No uncertainty =
 = Discrete time review =
-== First-order difference equations ==
+==<presentation> First-order difference equations ==
+==<handout> First-order difference equations ==
 * Let $x_t$ be a $k\times1$ vector.
 * $x_t$ follows a first-order difference equation if $\Delta x_t\equiv x_t-x_{t-1}$ is a function of $x_{t-1}$:
 \[
@@ -152,7 +153,8 @@ y_t = \rho y_{t-1} + u_t
 * We take the limit as $\Delta\to0$.
   * Often, we will have to rescale changes in the variable for the limit to make sense.
 
-== Differential equations ==
+==<presentation> Differential equations ==
+==<handout> Differential equations ==
 * Suppose $x$ follows a difference equation
 \[
 x_{t+\Delta} - x_t = F(x_{t},\Delta).
@@ -164,7 +166,8 @@ x_{t+\Delta} - x_t = F(x_{t},\Delta).
 \frac{x_{t+\Delta} - x_t}{\Delta} = \frac{F(x_{t},\Delta)}{\Delta}.
 \]
 
-== Infinitesimal changes ==
+==<presentation> Infinitesimal changes ==
+==<handout> Infinitesimal changes ==
 * Now let $\Delta\to0$:
 \[
 \lim_{\Delta\to0}\frac{x_{t+\Delta} - x_t}{\Delta } \equiv \frac{dx(t)}{dt} \equiv \dot x(t)
@@ -188,7 +191,8 @@ f(x^*) = 0.
 == Stability ==
 * The local stability of the steady state depends on the derivative (''gradient'') of $f$.
 
-== Example 1: The Solow model ==
+==<presentation> Example 1: The Solow model ==
+==<handout> Example 1: The Solow model ==
 * The law of motion for capital in the Solow model:
 \[
 \dot k = sf(k)-\delta k.
@@ -201,7 +205,8 @@ sf(k^*) = \delta k^*.
 
 == Phase diagram ==
 
-== Example 2: The Ramsey model ==
+==<presentation> Example 2: The Ramsey model ==
+==<handout> Example 2: The Ramsey model ==
 * The law of motion for capital and consumption in the Ramsey model (we will derive it later):
 \begin{align*}
 \dot k &= f(k)-\delta k-c\\
