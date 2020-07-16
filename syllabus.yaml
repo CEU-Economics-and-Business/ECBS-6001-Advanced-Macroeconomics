@@ -1,46 +1,101 @@
-code: 
-title:
+code: ECBS 6001
+title: Advanced Macroeconomics
 instructors:
-    -   name:
-        bio:
-        email:     
-        office:
-Ccredits:
-    us:
-    ects:
+    -   name: Miklós Koren
+        bio: Miklós Koren is professor of economics at CEU, senior research fellow at the Institute of Economics, and research fellow of the Centre for Economic Policy Research. His research focuses on how talent and technology jointly determine business success. Professor Koren has more than two decades of experience with microeconometrics and quantitative macro modeling. He is a certified Carpentries Instructor.
+        email: korenm@ceu.edu    
+        office: N13 213 (Budapest)
+credits:
+    us: 2
+    ects: 4
 module:  
-term:
-level:
+term: Fall
+level: 
+    - PhD
 prerequisites:
-    -
-    -
+    - Master's level Macroeconomics
 description:
-    content:
-    relevance:
+    content: The course introduces Markov processes and dynamic programming, two tools for forecasting dynamic processes and solving dynamic optimization problems. After introducing the key concepts and theoretical results, the tools will be immediately applied in quantitative computing using the Julia programming language.  
+    relevance: Markov processes and dynamic programming are key tools to solve dynamic economic problems and can be applied for stochastic growth models, industrial organization and structural labor economics. Julia is an efficient, fast and open source language for scientific computing, used widely in academia and policy analysis. 
 learning_outcomes:
-    -
-    -
+    - Use difference equations to characterize 2-dimensional dynamic systems.
+    - Solve for the steady-state of 2-dimensional linear dynamic systems.
+    - Characterize the stability of 2-dimensional linear dynamic systems. 
+    - Create plots in Julia.
+    - Understand the definition of Markov processes.
+    - Create functions in Julia.
+    - Simulate Markov processes in Julia.
+    - Understand the definition of Markov chains.
+    - Solve for ergodic distributions of Markov chains.
+    - Forecast Markov chains analytically.
+    - Apply arrays and matrix algebra in Julia.
+    - Simulate Markov chains in Julia.
+    - Understand the principle of dynamic programming.
+    - Derive the Bellman equation for several simple recursive problems.
+    - Solve for the value function using the guess and verify method.  
+    - Solve the Bellman equation using value function and policy function iteration.
+    - Understand contraction mappings.
+    - Use while loops in Julia numerical iteration.
+    - Solve the Ramsey growth model using dynamic programming.
+    - Solve the Diamond-Mortensen-Pissarides search model using dynamic programming.
 learning_areas:
     critical_thinking:
+        - Compare sequential and recursive formulation of dynamic optimization problems.
+        - Evaluate the limitations of Markov processes.
     quantitative_reasoning:
+        - Use Markov processes for forecasting.
     technology_skills:
+        - Install and use basic libraries in the Julia language.
+        - "Use key programming tools in Julia: functions, loops."
     interpersonal_communication_skills:
+        - Convey difficult concepts verbally.
     management_knowledge_and_skills:
+        - Create software with many components.
+        - Organize work components effectively.
+        - Meet deadlines.
     cultural_sensitivity_and_diversity:
+        - Work together with students of different backgrounds.
     ethics_and_social_responsibility:
+        - ""
 readings:
+    required:
+        - "Ljungqvist, Lars, Thomas J. Sargent. 2018. Recursive Macroeconomic Theory. 4th Edition. MIT Press. (earlier editions are also fine, but chapter numbering may be different)"
+        - "Cariaini, Petre. 2019. Introduction to Quantitative Macroeconomics Using Julia: From Basic to State-of-the-Art Computational Techniques. Academic Press. (Note that the code examples in the book use Julia 0.6. We will be using version 1.4, and discuss the necessary changes.)"
+    recommended:
+        - "Stachurski, John. 2009. Economic dynamics: theory and computation. MIT Press."
+        - "Sargent, Thomas J. and John Stachurski. 2017. Quantitative economics with Julia [website], https://lectures.quantecon.org/"
 teaching_methods:
-    -
-    -
+    - Conceptual lectures.
+    - Live coding together with instructor.
+    - Group discussion.
 assessments:
-    -   description:
-        weight:
-    -   description:
-        weight:
+    -   description: Class participation
+        weight: 20
+    -   description: Take-home problem
+        weight: 40
+    -   description: Take-home coding assignment
+        weight: 40
 technical_requirements:
-    -
-    -
+    - Personal laptop computer with administrative privileges to install open source software.
+    - "Operating system: Windows 10+ or Mac OS X 10.8+, or Linux 2.6.18+"
+    - Ability to install Julia 1.4, https://julialang.org/downloads/#current_stable_release
+    - Internet access. 
 outline:
-    -   session:
-        topic:
-        reading:
+    -   session: Classes 1-2
+        topic: Dynamic systems
+        reading: Cariaini (2019), Chapter 3.2. [Stachurski (2009), Chapter 4.1.]
+    -   session: Classes 3-4
+        topic: Markov processes
+        reading: Cariaini (2019), Chapter 1.
+    -   session: Classes 5-6
+        topic: Markov chains
+        reading: Ljungqvist and Sargent (2018), Chapter 2.
+    -   session: Classes 7-10
+        topic: Dynamic programming
+        reading: Cariaini (2019), Chapter 4. Ljungqvist and Sargent (2018), Chapters 3-4.
+    -   session: Class 11
+        topic: The Ramsey growth model
+        reading: Ljungqvist and Sargent (2018), Chapter 15.
+    -   session: Class 12
+        topic: The Diamond-Mortensen-Pissarides search model
+        reading: Ljungqvist and Sargent (2018), Chapter 29.
