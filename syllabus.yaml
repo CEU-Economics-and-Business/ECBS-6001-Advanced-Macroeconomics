@@ -60,7 +60,7 @@ learning_areas:
 readings:
     required:
         - "Ljungqvist, Lars, Thomas J. Sargent. 2018. Recursive Macroeconomic Theory. 4th Edition. MIT Press. (earlier editions are also fine, but chapter numbering may be different)"
-        - "Cariaini, Petre. 2019. Introduction to Quantitative Macroeconomics Using Julia: From Basic to State-of-the-Art Computational Techniques. Academic Press. (Note that the code examples in the book use Julia 0.6. We will be using version 1.4, and discuss the necessary changes.)"
+        - "Caraiani, Petre. 2019. Introduction to Quantitative Macroeconomics Using Julia: From Basic to State-of-the-Art Computational Techniques. Academic Press. (Note that the code examples in the book use Julia 0.6. We will be using version 1.4, and discuss the necessary changes.)"
     recommended:
         - "Stachurski, John. 2009. Economic dynamics: theory and computation. MIT Press."
         - "Sargent, Thomas J. and John Stachurski. 2017. Quantitative economics with Julia [website], https://lectures.quantecon.org/"
@@ -83,16 +83,16 @@ technical_requirements:
 outline:
     -   session: Classes 1-2
         topic: Dynamic systems
-        reading: Cariaini (2019), Chapter 3.2. [Stachurski (2009), Chapter 4.1.]
+        reading: Caraiani (2019), Chapter 3.2. [Stachurski (2009), Chapter 4.1.]
     -   session: Classes 3-4
         topic: Markov processes
-        reading: Cariaini (2019), Chapter 1.
+        reading: Caraiani (2019), Chapter 1.
     -   session: Classes 5-6
         topic: Markov chains
         reading: Ljungqvist and Sargent (2018), Chapter 2.
     -   session: Classes 7-10
         topic: Dynamic programming
-        reading: Cariaini (2019), Chapter 4. Ljungqvist and Sargent (2018), Chapters 3-4.
+        reading: Caraiani (2019), Chapter 4. Ljungqvist and Sargent (2018), Chapters 3-4.
     -   session: Class 11
         topic: The Ramsey growth model
         reading: Ljungqvist and Sargent (2018), Chapter 15.
