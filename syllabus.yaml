@@ -39,23 +39,30 @@ learning_outcomes:
     - Solve the Ramsey growth model using dynamic programming.
     - Solve the Diamond-Mortensen-Pissarides search model using dynamic programming.
 learning_areas:
-    critical_thinking:
+    - type: Critical thinking
+      outcomes:
         - Compare sequential and recursive formulation of dynamic optimization problems.
         - Evaluate the limitations of Markov processes.
-    quantitative_reasoning:
+    - type: Quantitative reasoning
+      outcomes:
         - Use Markov processes for forecasting.
-    technology_skills:
+    - type: Technology skills
+      outcomes:
         - Install and use basic libraries in the Julia language.
         - "Use key programming tools in Julia: functions, loops."
-    interpersonal_communication_skills:
+    - type: Interpersonal communication skills
+      outcomes:
         - Convey difficult concepts verbally.
-    management_knowledge_and_skills:
+    - type: Management knowledge and skills
+      outcomes:
         - Create software with many components.
         - Organize work components effectively.
         - Meet deadlines.
-    cultural_sensitivity_and_diversity:
+    - type: Cultural sensitivity and diversity
+      outcomes:
         - Work together with students of different backgrounds.
-    ethics_and_social_responsibility:
+    - type: Ethics and social responsibility
+      outcomes:
         - ""
 readings:
     required:
