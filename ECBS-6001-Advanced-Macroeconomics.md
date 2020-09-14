@@ -65,7 +65,7 @@ Ethics and social responsibility |
 ## 3. Reading List
 ### Required
 * Ljungqvist, Lars, Thomas J. Sargent. 2018. Recursive Macroeconomic Theory. 4th Edition. MIT Press. (earlier editions are also fine, but chapter numbering may be different)
-* Cariaini, Petre. 2019. Introduction to Quantitative Macroeconomics Using Julia: From Basic to State-of-the-Art Computational Techniques. Academic Press. (Note that the code examples in the book use Julia 0.6. We will be using version 1.4, and discuss the necessary changes.)
+* Caraiani, Petre. 2019. Introduction to Quantitative Macroeconomics Using Julia: From Basic to State-of-the-Art Computational Techniques. Academic Press. (Note that the code examples in the book use Julia 0.6. We will be using version 1.4, and discuss the necessary changes.)
  
 
 ### Recommended
@@ -101,10 +101,10 @@ Grading will be based on the total score out of 100, in line with CEU’s standa
 
 Session | Topics | Readings
 --|--|--
-Classes 1-2 | Dynamic systems | Cariaini (2019), Chapter 3.2. [Stachurski (2009), Chapter 4.1.]
-Classes 3-4 | Markov processes | Cariaini (2019), Chapter 1.
+Classes 1-2 | Dynamic systems | Caraiani (2019), Chapter 3.2. [Stachurski (2009), Chapter 4.1.]
+Classes 3-4 | Markov processes | Caraiani (2019), Chapter 1.
 Classes 5-6 | Markov chains | Ljungqvist and Sargent (2018), Chapter 2.
-Classes 7-10 | Dynamic programming | Cariaini (2019), Chapter 4. Ljungqvist and Sargent (2018), Chapters 3-4.
+Classes 7-10 | Dynamic programming | Caraiani (2019), Chapter 4. Ljungqvist and Sargent (2018), Chapters 3-4.
 Class 11 | The Ramsey growth model | Ljungqvist and Sargent (2018), Chapter 15.
 Class 12 | The Diamond-Mortensen-Pissarides search model | Ljungqvist and Sargent (2018), Chapter 29.
 
