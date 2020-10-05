@@ -1,0 +1,6 @@
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+secrets/*
+Untitled*
+.obsidian/*
+lit/*
