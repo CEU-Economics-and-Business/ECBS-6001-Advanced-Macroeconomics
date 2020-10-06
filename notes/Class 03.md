@@ -19,5 +19,6 @@ $\lambda_{11}=\lambda_{21}$.
 
 So, we can only have complex pairs of the type
 $$
-(\lambda_{11}+\lambda_{12}i, \lambda_{11}-\lambda_{12}i).
+(\lambda_{11}+\lambda_{12}i, \lambda_{11}-\lambda_{12}i),
 $$
+i.e., complex conjugates.
