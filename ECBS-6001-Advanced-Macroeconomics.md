@@ -6,7 +6,7 @@ Course code |		ECBS 6001
 Course title |		Advanced Macroeconomics
 Instructor |		Miklós Koren 
 Email |			korenm@ceu.edu 
-Office |			N13 213 (Budapest)  by appointment
+Office |			QS B510 (Vienna)  by appointment
 Credits |			2 US credits (4 ECTS credits)
 Module |		None	
 Term |			Fall 2020-2021
