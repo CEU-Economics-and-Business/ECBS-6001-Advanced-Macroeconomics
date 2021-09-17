@@ -15,8 +15,8 @@ To install Jupyter Lab, we use the miniconda distribution of (mostly Python) sof
 
 ## Julia
 
-1. [Download and install Julia 1.4](https://julialang.org/downloads/oldreleases/#v142_may_23_2020) relevant for your OS.
-2. Launch Julia and make sure the version reads `1.4.2`.
+1. [Download and install Julia 1.6](https://julialang.org/downloads/#current_stable_release) relevant for your OS.
+2. Launch Julia and make sure the version reads `1.6.2`.
 3. Type the following commands at your Julia prompt
 ```
 using Pkg
@@ -27,4 +27,4 @@ After completing all of these steps, start Jupyer Lab from the Anaconda Prompt.
 ```
 jupyter lab
 ```
-You should be able to select Julia 1.4 as one of your "kernels."
+You should be able to select Julia 1.6 as one of your "kernels."
