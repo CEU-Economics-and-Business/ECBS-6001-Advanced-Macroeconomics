@@ -9,6 +9,7 @@ verify_ssl = true
 docxtpl = "*"
 jinja2 = "*"
 pyyaml = "*"
+jupyterlab = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3"
