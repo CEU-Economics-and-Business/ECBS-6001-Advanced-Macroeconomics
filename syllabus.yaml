@@ -85,7 +85,7 @@ assessments:
 technical_requirements:
     - Personal laptop computer with administrative privileges to install open source software.
     - "Operating system: Windows 10+ or Mac OS X 10.8+, or Linux 2.6.18+"
-    - Ability to install Julia 1.4, https://julialang.org/downloads/#current_stable_release
+    - Ability to install Julia 1.6, https://julialang.org/downloads/#long_term_support_release
     - Internet access. 
 outline:
     -   session: Classes 1-2

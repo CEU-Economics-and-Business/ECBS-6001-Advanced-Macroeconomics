@@ -9,7 +9,7 @@ Email |			korenm@ceu.edu
 Office |			QS B510 (Vienna)  by appointment
 Credits |			2 US credits (4 ECTS credits)
 Module |		None	
-Term |			Fall 2020-2021
+Term |			Fall 2022-2023
 Course level |		PhD 
 Prerequisites |		Master's level Macroeconomics, 
 Course drop	|
@@ -53,13 +53,13 @@ The course will also help develop skills in the following areas.
 
 Learning Area | Learning Outcome
 --|--
-Critical thinking | Compare sequential and recursive formulation of dynamic optimization problems.Evaluate the limitations of Markov processes.
-Quantitative reasoning | Use Markov processes for forecasting.
-Technology skills | Install and use basic libraries in the Julia language.Use key programming tools in Julia: functions, loops.
-Interpersonal communication skills | Convey difficult concepts verbally.
-Management knowledge and skills | Create software with many components.Organize work components effectively.Meet deadlines.
-Cultural sensitivity and diversity | Work together with students of different backgrounds.
-Ethics and social responsibility | 
+Critical thinking | Compare sequential and recursive formulation of dynamic optimization problems. Evaluate the limitations of Markov processes. 
+Quantitative reasoning | Use Markov processes for forecasting. 
+Technology skills | Install and use basic libraries in the Julia language. Use key programming tools in Julia: functions, loops. 
+Interpersonal communication skills | Convey difficult concepts verbally. 
+Management knowledge and skills | Create software with many components. Organize work components effectively. Meet deadlines. 
+Cultural sensitivity and diversity | Work together with students of different backgrounds. 
+Ethics and social responsibility |  
 
 
 ## 3. Reading List
@@ -93,7 +93,7 @@ Grading will be based on the total score out of 100, in line with CEU’s standa
 
 * Personal laptop computer with administrative privileges to install open source software.
 * Operating system: Windows 10+ or Mac OS X 10.8+, or Linux 2.6.18+
-* Ability to install Julia 1.4, https://julialang.org/downloads/#current_stable_release
+* Ability to install Julia 1.6, https://julialang.org/downloads/#long_term_support_release
 * Internet access.
 
 

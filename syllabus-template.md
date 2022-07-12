@@ -9,7 +9,7 @@ Email |			{% for instructor in instructors %}{{ instructor.email }} {% endfor %}
 Office |			{% for instructor in instructors %}{{ instructor.office }} {% endfor %} by appointment
 Credits |			{{ credits.us }} US credits ({{ credits.ects }} ECTS credits)
 Module |		{{ module }}	
-Term |			{{ term }} 2020-2021
+Term |			{{ term }} 2022-2023
 Course level |		{% for l in level %}{{ l }} {% endfor %}
 Prerequisites |		{% for pre in prerequisites %}{{ pre }}, {% endfor %}
 Course drop	|
@@ -34,7 +34,7 @@ The course will also help develop skills in the following areas.
 
 Learning Area | Learning Outcome
 --|--
-{% for area in learning_areas %}{{ area.type }} | {% for outcome in area.outcomes %}{{ outcome }}{% endfor %}
+{% for area in learning_areas %}{{ area.type }} | {% for outcome in area.outcomes %}{{ outcome }} {% endfor %}
 {% endfor %}
 
 ## 3. Reading List

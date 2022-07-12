@@ -1,10 +1,10 @@
 from jinja2 import Template
 from docxtpl import DocxTemplate
-from yaml import load
+from yaml import load, SafeLoader
 
 doc = DocxTemplate('syllabus-template.docx')
 md = Template(open('syllabus-template.md', 'rt').read())
-context = load(open('syllabus.yaml'))
+context = load(open('syllabus.yaml'), Loader=SafeLoader)
 file_name = '-'.join('{} {}'.format(context['code'], context['title']).split())
 
 # save .md
