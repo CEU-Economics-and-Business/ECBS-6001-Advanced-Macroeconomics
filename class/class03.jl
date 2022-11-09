@@ -13,16 +13,6 @@ A = Array{Float64, 2}(undef, 2, 3)
 # ╔═╡ 159adfe0-1d08-41af-bccf-d9037c62a9b1
 B = similar(A)
 
-# ╔═╡ e790a4af-fa31-4f60-a5c5-fc7ae85845eb
-function forecast(ρ::Float64, x0::Float64, T=30)::Vector{Float64}
-	x = Vector{Float64}(undef, T)
-	x[1] = x0
-	for t = 2:T
-		x[t] = ρ * x[t-1]
-	end
-	return x
-end
-
 # ╔═╡ b344f8cc-4af1-49b4-91e9-301c475ba1e6
 function forecast(a::Vector{Float64}, x0::Vector{Float64}, T=30)::Vector{Float64}
 	P = length(a)
@@ -35,14 +25,20 @@ function forecast(a::Vector{Float64}, x0::Vector{Float64}, T=30)::Vector{Float64
 	# this is the same x[1:P] = x0
 	for t = P+1:T
 		for p = 1:P
-			x[t] = x[t] + a[p] * x[t-p] 
+			x[t] += a[p] * x[t-p] 
 		end
 	end
 	return x
 end
 
+# ╔═╡ a1f61a40-cc3b-4187-9cda-770f2ccb81d1
+md"Why not do AR(1) as a special case of AR(p)?"
+
+# ╔═╡ 71d6ef2b-d41e-4dff-a583-25e718c48816
+forecast(ρ::Float64, x0::Float64, T=30) = forecast([ρ], [x0], T)
+
 # ╔═╡ 56767180-218b-44cb-af36-e7ae36d83a0b
-forecast(0.8, 1.0)
+forecast([0.8], [1.0])
 
 # ╔═╡ 41cb8430-7792-4c9b-af3f-ae065a207a8f
 @assert 1 + 3 == 5
@@ -63,19 +59,98 @@ plot(forecast([0.7, -0.3], [1.0, 1.0]))
 plot(forecast([0.7, -0.1, 0.9], [0.0, 0.0, 1.0]))
 
 # ╔═╡ 1c89ccee-1c3f-45f8-88a5-0ce7f76dc344
-function solution(m1::Complex, m2::Complex, T=30)::Vector{Float64}
-	x = Vector{Float64}(undef, T)
-	for t = 1:T
-		x[t] = m1^t + m2^t
-	end
+function solution(m1::Complex, T=30)::Vector{Float64}
+	# compute complex conjugate
+	m2 = real(m1) - imag(m1)*im
+	t = 1:T
+	return m1 .^ t + m2 .^ t
+	# you can actuall omit the "return" statement
+end
+
+# ╔═╡ 01e264d1-4fa9-472d-9ce8-c5776c0704c6
+typeof(1:30)
+
+# ╔═╡ c147be71-3c49-418a-8d0c-37905c04ae37
+t = 1:30
+
+# ╔═╡ 671e75b8-1acd-4f70-9bb1-76a2a1a52271
+0.8 .^ t
+
+# ╔═╡ 792fc875-87de-49a1-a282-617e2d94846e
+function solution(m1::Float64, m2::Float64, x0::Float64, x1::Float64, T=30)::Vector{Float64}
+	# check if not special case
+	@assert m1 != m2
+	c1 = (x1 - x0* m2) / (m1 - m2)
+	c2 = (x0*m1 - x1) / (m1 - m2)
+	t = 1:T
+	x = c1 * m1 .^ t + c2 * m2 .^ t
+	# check one of the two boundary conditions b/c lazy
+	@assert x[1] == x1
 	return x
 end
 
-# ╔═╡ 49d79d23-c4c4-4d80-85a6-995eca98bf0e
-plot(solution(0.9+0.2im, 0.9-0.2im, 100))
+# ╔═╡ a40dd4f1-69e8-472d-8bb8-4174d7111819
+md"Why does this not work?"
 
-# ╔═╡ c147be71-3c49-418a-8d0c-37905c04ae37
-3+2im
+# ╔═╡ 1de44c75-f36c-4ff8-8de6-df084ea768b7
+1 != 2
+
+# ╔═╡ 4684068e-69af-42d3-be21-e21e780c4b77
+function solution(ρ::Float64, T=30)::Vector{Float64}
+	return ρ .^ (1:T)
+end
+
+# ╔═╡ 49d79d23-c4c4-4d80-85a6-995eca98bf0e
+plot(
+	solution(0.9+0.2im, 100)
+)
+
+# ╔═╡ 1132c79b-9048-4d68-b71e-252f5837666b
+plot(
+	solution(0.6, -0.3, 1.0, 1.0)
+)
+
+# ╔═╡ 1e8ae849-cb66-4f81-be1b-130abf6c88b8
+plot(
+	[solution(0.6) solution(0.3)]
+)
+
+# ╔═╡ 4b7792e8-f8ed-43c8-a4e1-1f2c96bdc7bd
+plot(
+	solution(0.6) - solution(0.3)
+)
+
+# ╔═╡ 3a41d892-77a1-475d-b87e-e95ddaf1a1a9
+size(ones(2, 3, 4))
+
+# ╔═╡ 6ef12491-521d-4acd-9be7-476c90b88044
+[1 2 3; 4 5 6]
+
+# ╔═╡ f2c0356c-c779-4c74-b409-f03cb3c5dcf9
+a = [1,2,3]
+
+# ╔═╡ d8be4cb7-3830-489d-bfe6-c53802c580f6
+b = [4,5,6]
+
+# ╔═╡ 742525d9-8a0d-4f06-b5ad-2cbd2fcdc8fd
+[a b]
+
+# ╔═╡ b45766a2-b752-4c82-aca7-df6c302b9790
+[a'; b']
+
+# ╔═╡ db790fb2-b387-47cf-a55e-8b588eb0751e
+plot(
+	[1, 2, 3],
+	[1, 4, 9]
+)
+
+# ╔═╡ 27c7fd23-a59e-44e9-ba33-22736f8191b8
+plot(
+	[1 1; 2 4; 3 9]
+)
+
+# ╔═╡ 5d28a686-d072-4f0e-91ea-4bdff91f13c7
+
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -980,9 +1055,10 @@ version = "1.4.1+0"
 # ╠═79d65bb8-f05a-4ea0-9cf4-0eea26c8e03d
 # ╠═784d5b1a-5f67-11ed-1212-01f1a62d6b43
 # ╠═159adfe0-1d08-41af-bccf-d9037c62a9b1
-# ╠═e790a4af-fa31-4f60-a5c5-fc7ae85845eb
 # ╠═56767180-218b-44cb-af36-e7ae36d83a0b
 # ╠═b344f8cc-4af1-49b4-91e9-301c475ba1e6
+# ╟─a1f61a40-cc3b-4187-9cda-770f2ccb81d1
+# ╠═71d6ef2b-d41e-4dff-a583-25e718c48816
 # ╠═41cb8430-7792-4c9b-af3f-ae065a207a8f
 # ╠═db8afcb3-f01c-425a-9080-7f72aabf21e9
 # ╠═2122762e-d0cb-4a54-ad7f-060f4589376c
@@ -990,7 +1066,25 @@ version = "1.4.1+0"
 # ╠═7eda4a7e-5f39-4f28-a223-949975119b90
 # ╠═e3be6600-5fc1-4ff5-b517-fb9537c378c0
 # ╠═1c89ccee-1c3f-45f8-88a5-0ce7f76dc344
+# ╠═01e264d1-4fa9-472d-9ce8-c5776c0704c6
 # ╠═49d79d23-c4c4-4d80-85a6-995eca98bf0e
 # ╠═c147be71-3c49-418a-8d0c-37905c04ae37
+# ╠═671e75b8-1acd-4f70-9bb1-76a2a1a52271
+# ╠═792fc875-87de-49a1-a282-617e2d94846e
+# ╠═1132c79b-9048-4d68-b71e-252f5837666b
+# ╠═a40dd4f1-69e8-472d-8bb8-4174d7111819
+# ╠═1de44c75-f36c-4ff8-8de6-df084ea768b7
+# ╠═4684068e-69af-42d3-be21-e21e780c4b77
+# ╠═1e8ae849-cb66-4f81-be1b-130abf6c88b8
+# ╠═4b7792e8-f8ed-43c8-a4e1-1f2c96bdc7bd
+# ╠═3a41d892-77a1-475d-b87e-e95ddaf1a1a9
+# ╠═6ef12491-521d-4acd-9be7-476c90b88044
+# ╠═f2c0356c-c779-4c74-b409-f03cb3c5dcf9
+# ╠═d8be4cb7-3830-489d-bfe6-c53802c580f6
+# ╠═742525d9-8a0d-4f06-b5ad-2cbd2fcdc8fd
+# ╠═b45766a2-b752-4c82-aca7-df6c302b9790
+# ╠═db790fb2-b387-47cf-a55e-8b588eb0751e
+# ╠═27c7fd23-a59e-44e9-ba33-22736f8191b8
+# ╠═5d28a686-d072-4f0e-91ea-4bdff91f13c7
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

@@ -43,9 +43,10 @@ $$
 x_{t2} = c_2 m_2^t
 $$
 and so is
-$$
-a c_1 m_1^t + b c_2 m_2^t.
-$$
+> $$
+> a c_1 m_1^t + b c_2 m_2^t.
+> $$
+
 To pin down constants, you need two boundary conditions. For example,
 $$
 x_1 = X_1
@@ -98,3 +99,35 @@ c_1 e^{i\theta t} + c_2 e^{-i\theta t}
 \right]
 $$
 for $x_t$ to be real for all $t$, we need either $c_1=c_2$ or $c_1 = -c_2$. In these cases, the solutions are trigonometric functions cosine and sine. In the first case, the term in bracket is $c_1 2\cos(\theta t)$.
+
+## How to find constants?
+Generic solution
+$$
+x_t = c_1m_1^t + c_2 m_2^t.
+$$
+Only do the case when boundary conditions set the first two values.
+$$
+x_0 = X_0 = c_1\cdot 1 + c_2\cdot 1 = c_1+c_2
+$$
+$$
+x_1 = X_1 = c_1 m_1 + c_2 m_2
+$$
+$$
+c_2 = X_0 - c_1
+$$
+$$
+X_1 = c_1 m_1 + (X_0-c_1)m_2
+= c_1(m_1-m_2) + X_0 m_2
+$$
+If $m_1 \neq m_2$, then (put aside special case for now)
+$$
+c_1 = \frac {X_1 - X_0 m_2}
+	{m_1-m_2},
+$$
+$$
+c_2 = X_0 - c_1 = 
+\frac{X_0(m_1-m_2) - X_1 + X_0m_2}
+{m_1 - m_2} = 
+\frac{X_0 m_1 - X_1}
+{m_1-m_2}
+$$
