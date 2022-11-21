@@ -84,20 +84,14 @@ plot(
 # ╔═╡ 524ed7e7-bfba-44fc-87ae-924cf8c1faa1
 eigen(A')
 
+# ╔═╡ 5eec58f8-12d9-4d62-b0d1-8f11a65cdab4
+x = forecast(A, x0, 300)
+
 # ╔═╡ 00754e2f-7ed4-4d1e-b4ae-1bc12557d483
 sum(x, dims=1)
 
 # ╔═╡ 786b2e77-7e86-41a0-962e-7aa034281b3d
 plot(x[1,:], x[2, :])
-
-# ╔═╡ eaadf69d-c515-4eed-81dd-e7e9a577bbfa
-# ╠═╡ disabled = true
-#=╠═╡
-x = forecast(A, x0, 300)
-  ╠═╡ =#
-
-# ╔═╡ 5eec58f8-12d9-4d62-b0d1-8f11a65cdab4
-x = forecast(A, x0, 300)
 
 # ╔═╡ Cell order:
 # ╠═68247294-640f-11ed-3225-4d5fee319689
