@@ -28,19 +28,18 @@ $$
 $$
 Suppose K=2 and 1=employment, 2=unemployment. Then $\pi_{t1}$ is the prob of being employed in period t, $\pi_{t2} = 1-\pi_{t1}$.
 
-> ### PMFs
-> Because pmfs have
-> $$
+### PMFs
+Because pmfs have
+$$
 1\ge \pi_k
  \ge 0
- $$
- and
- $$
- \sum_{k=1}^K \pi_k = 1.
- $$
- 
- 
- How do we transition from employment to unemployment? Suppose $x_1 = 1$. What is the probability that $x_2 = 1$? This will be characterized by a PMF.
+$$
+and 
+$$
+\sum_{k=1}^K \pi_k = 1.
+$$
+How do we transition from employment to unemployment? Suppose $x_1 = 1$. What is the probability that $x_2 = 1$? This will be characterized by a PMF.
+
 ### Markov property 
 My forecast, that is, my PMF can only depend on the current value of $x$. Then I will have K PMFs, each of length K.
 
@@ -48,7 +47,6 @@ For every $i$, collect PMF into a row vector of probs:
 $$
 \Pr(x_2 = k| x_1=i) = \pi_{ik}
 $$
-
 So let's arrange them in a square matrix, KxK:
 $$
 \mathbf P = 
@@ -65,11 +63,11 @@ and
 $$
 \sum_k \pi_{ik}
  = 1 \text{ for all } i$$
- in matrix notation:
+in matrix notation:
  $$
  \mathbf P \mathbf 1 = \mathbf 1 \tag{**}
  $$
- P is called a **transition matrix**. Square matrices satisfying (*) and (**) are **stohastic matrices**.
+P is called a **transition matrix**. Square matrices satisfying (`*`) and (`**`) are **stohastic matrices**.
 $$
 \mathbf P = 
 \begin{bmatrix}
