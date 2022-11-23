@@ -117,3 +117,64 @@ is the first row if $\mathbf P$, the conditional probs for time 1.
 $$
 \pi_{t+2} =\mathbf P'\mathbf P'\pi_t = (\mathbf P^2)' \pi_t
 $$
+
+## 2022-11-23
+For $t$-period forecast
+$$
+\pi_t =  (\mathbf P')^t \pi_0
+$$
+Use eigenvalue decomposition
+$$
+\mathbf P' \mathbf v_i = \lambda_i \mathbf v_i
+$$
+Is it possible to converge to a steady state PMF? This means that
+$$
+\mathbf P' \pi_* = 1\times \pi_*.
+$$
+This means that $\lambda_i=1$ with corresponding eigenvector of $\pi_*$. 
+
+> NOTE: We have shown that $\pi_*$ is unique. We have not shown that $\lim_{t\to\infty} (\mathbf P')^t\pi_0 = \pi_*$.
+
+
+If exists $\lambda_1 = 1$, then $\pi_{(1)}$ is a steady state such that $\pi_t=\pi_{(1)}$ if started from $\pi_{(1)}$ for all $t$.
+
+### Formal statements 
+1. For stochastic $P$, 1 is always an eigenvalue. 
+Remember
+$$
+\mathbf P \mathbf 1 = \mathbf 1, 
+$$
+which is an eigenvalue equation! Meaning 1.0 is an eigenvalue of $P$.  And the eigenvalues of P and P' are the same, but with probably *different* eigenvector!
+$$
+\mathbf P = \mathbf Q \mathbf \Lambda \mathbf Q^{-1}
+$$
+$$
+\mathbf P' = \mathbf Q^{-1}{}' \mathbf \Lambda' \mathbf Q'
+$$
+but since $\Lambda$ is diagonal, $\Lambda = \Lambda '$. 
+
+1a. There may be *multiple* eigenvalues of 1.
+1b. Eigenvector 1 only has non-negative elements. This means we can scale to PMF.
+
+2. All eigenvalues $|\lambda_i| \le 1$. TODO: link to proof
+3. Question: for $K>2$ can we have pairs of complex conjugates as eigenvalues?
+
+For any $\pi_0$, write it as a linear combination of eigenvectors:
+$$
+\pi_0 = \sum_{i=1}^K\alpha_{i0} \mathbf v_i
+$$
+(under "some" conditions, TODO: clarify, possibly true for non-singular transition matrices)
+$$
+\pi_1 = \mathbf P'\pi_0 = 
+\sum_{i=1}^K\mathbf P'\alpha_{i0} \mathbf v_i = 
+\sum_{i=1}^K\alpha_{i0} \lambda_i \mathbf v_i.
+$$
+I can write $\pi_1$ as a different linear combination, with $\alpha_{i1} = \alpha_{i0}\lambda_i$. More generally, 
+$$
+\pi_t = \sum_{i=1}^K \alpha_{i0}\lambda_i^t \mathbf v_i.
+$$
+Take out first eigenvector,
+$$
+\pi_t = \alpha_{10} \pi_* + \sum_{i=2}^K \alpha_{i0}\lambda_i^t\mathbf v_i.
+$$
+distance from steady state: $\alpha_2 ...$ , speed of convergence : $\lambda_2 ...$ 
