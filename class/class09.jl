@@ -133,7 +133,19 @@ end
 log.(1:10)
 
 # ╔═╡ 952e6449-eecd-4ef6-b5e5-e8389b850141
-iterate_cake_value(ones(30))
+v1 = iterate_cake_value(ones(30))
+
+# ╔═╡ 898cad98-e2c6-482d-adbc-f04668a12e81
+v2 = iterate_cake_value(v1)
+
+# ╔═╡ 9f7d607b-4538-432c-a065-ffcfcab8a73f
+v3 = iterate_cake_value(v2)
+
+# ╔═╡ b5eb91d8-83b9-4def-8230-8e0e17b19809
+plot(v3)
+
+# ╔═╡ 7ad14498-70af-43fd-93c4-6455bbfda2c7
+
 
 # ╔═╡ f3ec84c7-a8ee-485b-8ad3-505d2f1bec7e
 
@@ -173,4 +185,8 @@ iterate_cake_value(ones(30))
 # ╠═8b1960dc-328c-4ee2-8ce2-fdd37b849990
 # ╠═3048a4c1-c688-4db4-b3a0-1bbabdf6c553
 # ╠═952e6449-eecd-4ef6-b5e5-e8389b850141
+# ╠═898cad98-e2c6-482d-adbc-f04668a12e81
+# ╠═9f7d607b-4538-432c-a065-ffcfcab8a73f
+# ╠═b5eb91d8-83b9-4def-8230-8e0e17b19809
+# ╠═7ad14498-70af-43fd-93c4-6455bbfda2c7
 # ╠═f3ec84c7-a8ee-485b-8ad3-505d2f1bec7e
