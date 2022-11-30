@@ -71,4 +71,8 @@ $$
 $$
 resulting in a second-order difference equation for $\pi_{*n}$. I can solve for this recursively.
 
+**Birth and death process**: this one with a fixed birth rate and death rate.
+
+Steady state PMF is geometrically distributed. For convergence, we need $\lambda/\mu<1$. 
+
 ### 4. Start with dynamic programming

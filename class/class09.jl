@@ -22,6 +22,9 @@ using Plots
 # ╔═╡ 913845fb-5281-4ccb-8044-a589601dc19b
 using Distributions
 
+# ╔═╡ be9677ea-12ca-4bc4-a8e3-f88eef990233
+using Math
+
 # ╔═╡ fa4945c1-b586-41d1-961b-0db262af4da8
 eigen([1 0; 0 1])
 
@@ -110,10 +113,29 @@ mean(standard_normal)
 # ╔═╡ 6b21fb20-982a-4d69-92ba-660ae5f216c2
 rand(standard_normal)
 
+# ╔═╡ 1c46de04-d7f7-41a4-a6ad-5a151115b49c
+md"# Value function iteration"
+
+# ╔═╡ 8b1960dc-328c-4ee2-8ce2-fdd37b849990
+function iterate_cake_value(V::Vector{Float64}, β=0.95)::Vector{Float64}
+	K = length(V)
+	V1 = Vector{Float64}(undef, K)
+	for k = 1:K
+		possible_consumptions = 0:k-1
+		
+		V1[k] = maximum(log.(possible_consumptions) + β * V[K .- possible_consumptions])
+		
+	end
+	return V1
+end
+
 # ╔═╡ 3048a4c1-c688-4db4-b3a0-1bbabdf6c553
+log.(1:10)
 
+# ╔═╡ 952e6449-eecd-4ef6-b5e5-e8389b850141
+iterate_cake_value(ones(30))
 
-# ╔═╡ 404b5556-f758-4df0-9a52-780862e09177
+# ╔═╡ f3ec84c7-a8ee-485b-8ad3-505d2f1bec7e
 
 
 # ╔═╡ Cell order:
@@ -146,5 +168,9 @@ rand(standard_normal)
 # ╠═3e1e0e9c-8846-4f0d-bee7-f7dcbbe1edc9
 # ╠═b3e54a06-bbd6-4663-bc06-364c9c85470b
 # ╠═6b21fb20-982a-4d69-92ba-660ae5f216c2
+# ╟─1c46de04-d7f7-41a4-a6ad-5a151115b49c
+# ╠═be9677ea-12ca-4bc4-a8e3-f88eef990233
+# ╠═8b1960dc-328c-4ee2-8ce2-fdd37b849990
 # ╠═3048a4c1-c688-4db4-b3a0-1bbabdf6c553
-# ╠═404b5556-f758-4df0-9a52-780862e09177
+# ╠═952e6449-eecd-4ef6-b5e5-e8389b850141
+# ╠═f3ec84c7-a8ee-485b-8ad3-505d2f1bec7e
