@@ -139,4 +139,145 @@ $$
 Tv := (Tv)(x) = \max _c \ln c+ \beta v(x-c)
 $$
 ### Policy function iteration
+What is a policy function?
+$$
+c(x) := \arg\max _c u(c) + \beta V(x-c)
+$$
+We want
+$$
+Tc := (Tc)(x) = \arg\max_c \ln c + \beta V(x-c)
+$$
+we need to compute $V$ for a given $c(x)$. Given this rule, and starting from $x_0$, I can compute $x_1 = x_0 - c(x_0)$ and $x_2 = x_1 - c(x_1)$, etc. Plug this into utility, to get PDV:
+$$
+V_{(c)}(x_0) = \sum_{t=0}^\infty
+\beta^t\ln c(x_t)
+$$
+Plan:
+1. Get candidate $c(x)$
+2. Compute the law of motion for $x$: $x_0,x_1,...$
+3. Compute PDV to get $V$
+4. Solve Bellman with this $V$ to get new $c(x)$
+
 ### Parametric policy function iteration (1+3)
+In (1) and (4), you are constrained to use a parametric $c(x)$.
+#### Linear policy
+Suppose
+$$
+c(x) = ax
+$$
+with $a\in(0,1)$.
+#### Step 2
+Then $x_1 = (1-a)x_0$, $x_t = (1-a)^t x_0$, ... and 
+$$
+c_t = c(x_t) = a(1-a)^tx_0
+$$
+#### Step 3
+with log utility,
+$$
+u_t = \ln c_t = \ln a + t\ln(1-a) + \ln x_0
+$$
+Add up PDV,
+$$
+V(x_0) = ... + \ln x_0 \sum_{t=0}^\infty \beta^t = ... + \frac {\ln x_0}{1-\beta}
+$$
+#### Step 4
+FOC for "optimal" $c$, relying on the fact that
+$$
+\frac {\partial ...}
+{\partial x_0} = 0
+$$
+$$
+\frac 1c + \beta \frac{\partial V}{\partial x} \frac{\partial x}{\partial c} = 0
+$$
+$$
+\frac 1c = \frac \beta{1-\beta}
+\frac 1{x-c}
+$$
+In **this case**, $a$ did not show up, so we already have a solution in one iteration.
+
+## Break until 14:28
+
+### Dynamic programming with Markov chains
+Suppose $x_t$ follows some some Markov chain with $x_0$ and transition matrix $\mathbf P$.
+
+General Bellman
+$$
+V(x_t) = \max_c E[u(x_t, c) + \beta V(x_{t+1})]
+$$
+or with deterministic
+$$
+V(x_t) = \max_c u(x_t, c) + \beta EV(x_{t+1})
+$$
+We know how to forecast a MC, getting PMF $\pi_{t+1} = \Pr(x_{t+1}=k|x_t=x_t)$.
+
+$$
+E[V(x_{t+1})] = \sum_{k=1}^K \pi_{k,t+1} v_k = \pi_{t+1}'\mathbf v
+$$
+### Without optimization
+$$
+V(x) := \mathbf v
+$$
+is a K by 1 vector
+$$
+\mathbf v = \mathbf u + \beta \mathbf P \mathbf v
+$$
+For state 1,
+$$
+v_1 = u_1 + \beta \mathbf P_{1.}\mathbf v
+$$
+With two states,
+$$
+v_e = w +\beta [\pi_{11} v_e + \pi_{12} v_u]
+$$
+$$
+v_u = b +\beta [\pi_{21} v_e + \pi_{22} v_u]
+$$
+$$
+\mathbf v = (\mathbf I - \beta \mathbf P)^{-1}\mathbf u 
+$$
+
+### With optimization
+$$
+\mathbf v = \max_c \mathbf u(c) + \beta \mathbf P(c) \mathbf v
+$$
+1. give me a $c$
+2. compute value given $c$
+$$
+\mathbf v = (\mathbf I - \beta \mathbf P_c)^{-1}\mathbf u_c
+$$
+
+## Endogenous search
+Suppose firing probability fixed $\delta$. Job finding prb is $\Lambda(c)$ for $c>0$.
+$$
+\Lambda(c) = \frac {\lambda c}{1+\lambda c}
+$$
+Bellman for unemployed state:
+$$
+v_u = \max_c b - c + \beta[\Lambda(c)v_e+(1-\Lambda(c))v_u]
+$$
+$$
+v_u = \max_c b - c + \beta
+\frac{\lambda c v_e +v_u}{1+\lambda c}
+$$
+FOC:
+$$
+-1 +\beta 
+\frac{\lambda v_e(1+\lambda c) - (\lambda c v_e + v_u)\lambda}
+{(1+\lambda c)^2} = 0
+$$
+$$
+\beta 
+[{\lambda v_e(1+\lambda c) - (\lambda c v_e + v_u)\lambda}] = (1+\lambda c)^2
+$$
+$$
+\beta \lambda
+[ v_e -  v_u] = (1+\lambda c)^2
+$$
+$$
+\frac 1{1+\lambda c} = \sqrt{
+\frac 1
+{\beta\lambda(v_e - v_u)}
+}
+$$
+for this to be a prob, we need $\beta\lambda(v_e - v_u)>1$. 
+### TODO: check second-order condition

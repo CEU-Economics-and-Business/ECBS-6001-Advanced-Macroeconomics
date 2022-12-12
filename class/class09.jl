@@ -123,7 +123,7 @@ function iterate_cake_value(V::Vector{Float64}, β=0.95)::Vector{Float64}
 	for k = 1:K
 		possible_consumptions = 0:k-1
 		
-		V1[k] = maximum(log.(possible_consumptions) + β * V[K .- possible_consumptions])
+		V1[k] = maximum(log.(possible_consumptions) + β * V[k .- possible_consumptions])
 		
 	end
 	return V1
@@ -133,7 +133,7 @@ end
 log.(1:10)
 
 # ╔═╡ 952e6449-eecd-4ef6-b5e5-e8389b850141
-v1 = iterate_cake_value(ones(30))
+v1 = iterate_cake_value(zeros(30))
 
 # ╔═╡ 898cad98-e2c6-482d-adbc-f04668a12e81
 v2 = iterate_cake_value(v1)
@@ -145,9 +145,127 @@ v3 = iterate_cake_value(v2)
 plot(v3)
 
 # ╔═╡ 7ad14498-70af-43fd-93c4-6455bbfda2c7
+md"# DP with Markov chains"
 
+# ╔═╡ 7f87c02c-9d3b-4835-b79b-552fd88c5a85
+function iterate_value_mc(v::Vector{Float64}, u::Vector{Float64}, P::Matrix{Float64}, β=0.95)::Vector{Float64}
+	return u + β*P*v
+end
+
+# ╔═╡ 8fbff738-d1d9-419b-9431-7d239bc8b7ba
+P = [ 	0.9 0.1;
+		0.6 0.4]
+
+# ╔═╡ 24297218-8dfa-4452-bca0-bcd3cfcca81a
+utils = [1.0, 0.6]
+# unemployment benefit has replacement rate of 0.6
+
+# ╔═╡ 43d59b55-8f02-440a-a3c8-d41b02960f1f
+iterate_value_mc(utils / (1-0.95), utils, P)
+
+# ╔═╡ db61f6f7-d80a-4181-b688-5342511f934b
+begin
+	K = 300
+	values = ones(2, K) * 20
+	for k=2:K
+		values[:, k] = iterate_value_mc(values[:, k-1], utils, P)
+	end
+	plot(values')
+end
 
 # ╔═╡ f3ec84c7-a8ee-485b-8ad3-505d2f1bec7e
+inv(I - 0.95 * P) * utils
+
+# ╔═╡ ac99c491-ebc9-4c66-9870-5fc0d820df70
+I(2)
+
+# ╔═╡ 85f62f1f-e1dd-4caf-9a38-9d74839784c5
+md"# Reflections on the Python-R-Stata debate"
+
+# ╔═╡ c5fa4f78-5754-40b3-bbb3-532353d97e4f
+debate_data = [14 1 2; 6 13 2; 5 1 12]
+
+# ╔═╡ 838873e2-2f05-4073-9dff-150878294357
+transition_matrix = debate_data ./ sum(debate_data, dims=2)
+
+# ╔═╡ 1246d57c-e4c2-4e49-b780-2b4c172a2298
+eigen(transition_matrix')
+
+# ╔═╡ 7f8f937d-c385-493e-9c47-e7b0137ca3e5
+steady_state = eigen(transition_matrix').vectors[:, 3] ./ sum(eigen(transition_matrix').vectors[:, 3])
+
+# ╔═╡ 2ffb4a19-8afc-433c-88c5-40d33da4dd59
+function solve_bellman_for_mc(P::Matrix{Float64}, u::Vector{Float64}, β=0.95)::Vector{Float64}
+	return inv(I - β * P) * u
+end
+
+# ╔═╡ 5ca58e32-a42d-4ce3-9d0a-08f430dda8dc
+md"Note: we could use a composite type to store all the components of Bellman+MC together."
+
+# ╔═╡ 0c271a97-e90c-41c1-bfbb-49b2582dc705
+function solve_optimal_search(v::Vector{Float64}, λ::Float64, β=0.95)::Float64
+	prob_unemployed = sqrt(1/(β*λ*(v[1] - v[2])))
+	if prob_unemployed < 0.0001
+		prob_unemployed = 0.0001
+	elseif prob_unemployed > 1
+		prob_unemployed = 1
+	end
+	return (1/prob_unemployed - 1)/λ
+end
+
+# ╔═╡ 3e1d90e6-ddd4-4ea8-bbbd-ef3013741022
+function iterate_value_for_search(v::Vector{Float64}, λ::Float64, δ::Float64, u::Vector{Float64}, β=0.95)::Vector{Float64}
+	# given optimal solution, what is transition matrix?
+	c = solve_optimal_search(v, λ, β)
+	Λ = λ * c / (1 + λ * c)
+	P = [1-δ δ; Λ 1-Λ]
+	return u + β * P * v
+end
+
+# ╔═╡ ce36dfe0-0bb1-49c7-902c-1c5ef5f71995
+iterate_value_for_search(ones(2), 0.1, 0.1, [1.0, 0.6])
+
+# ╔═╡ 659f446f-42d6-4c4d-8024-b2a82551fb9d
+begin
+	K2 = 300
+	v = zeros(K2, 2)
+	for k = 2:K2
+		v[k, :] = iterate_value_for_search(v[k-1, :], 3.0, 0.1, [1.0, 0.6])
+	end
+	plot(v)
+end
+
+# ╔═╡ a1fd0480-497a-466e-910a-96a63c78d357
+v
+
+# ╔═╡ 179e5955-1cd6-49a9-8e47-3dcc2944de4c
+sqrt(1/(0.95*3*(v[300, 1] - v[300, 2])))
+
+# ╔═╡ 6b73c137-ad76-4bcf-88f5-34714c5ffe3a
+function iterate_policy_for_search(c::Float64, λ::Float64, δ::Float64, u::Vector{Float64}, β=0.95)::Float64
+	Λ = λ*c / (1 + λ*c)
+	P = [1-δ δ; Λ 1-Λ]
+	v = solve_bellman_for_mc(P, u, β)
+	return solve_optimal_search(v, λ, β)
+end
+
+# ╔═╡ 16aa6f4a-3e95-4713-8cc9-6a6e9784d5cf
+iterate_policy_for_search(0.0, 3.0, 0.1, [1.0, 0.6])
+
+# ╔═╡ 5736d5b1-7157-4460-b5fd-c91a06e335dc
+iterate_policy_for_search(0.6, 3.0, 0.1, [1.0, 0.6])
+
+# ╔═╡ 8faafcf2-8114-4f67-9d77-94957dcb3ff3
+begin
+	K3 = 300
+	c = zeros(K3)
+	for k = 2:K3
+		c[k] = iterate_policy_for_search(c[k-1], 3.0, 0.1, [1.0, 0.6])
+	end
+	plot(c)
+end
+
+# ╔═╡ e235fd07-7d3e-47f5-9f91-ef1f77f027aa
 
 
 # ╔═╡ Cell order:
@@ -188,5 +306,29 @@ plot(v3)
 # ╠═898cad98-e2c6-482d-adbc-f04668a12e81
 # ╠═9f7d607b-4538-432c-a065-ffcfcab8a73f
 # ╠═b5eb91d8-83b9-4def-8230-8e0e17b19809
-# ╠═7ad14498-70af-43fd-93c4-6455bbfda2c7
+# ╟─7ad14498-70af-43fd-93c4-6455bbfda2c7
+# ╠═7f87c02c-9d3b-4835-b79b-552fd88c5a85
+# ╠═8fbff738-d1d9-419b-9431-7d239bc8b7ba
+# ╠═24297218-8dfa-4452-bca0-bcd3cfcca81a
+# ╠═43d59b55-8f02-440a-a3c8-d41b02960f1f
+# ╠═db61f6f7-d80a-4181-b688-5342511f934b
 # ╠═f3ec84c7-a8ee-485b-8ad3-505d2f1bec7e
+# ╠═ac99c491-ebc9-4c66-9870-5fc0d820df70
+# ╠═85f62f1f-e1dd-4caf-9a38-9d74839784c5
+# ╠═c5fa4f78-5754-40b3-bbb3-532353d97e4f
+# ╠═838873e2-2f05-4073-9dff-150878294357
+# ╠═1246d57c-e4c2-4e49-b780-2b4c172a2298
+# ╠═7f8f937d-c385-493e-9c47-e7b0137ca3e5
+# ╠═2ffb4a19-8afc-433c-88c5-40d33da4dd59
+# ╠═5ca58e32-a42d-4ce3-9d0a-08f430dda8dc
+# ╠═0c271a97-e90c-41c1-bfbb-49b2582dc705
+# ╠═3e1d90e6-ddd4-4ea8-bbbd-ef3013741022
+# ╠═ce36dfe0-0bb1-49c7-902c-1c5ef5f71995
+# ╠═659f446f-42d6-4c4d-8024-b2a82551fb9d
+# ╠═a1fd0480-497a-466e-910a-96a63c78d357
+# ╠═179e5955-1cd6-49a9-8e47-3dcc2944de4c
+# ╠═6b73c137-ad76-4bcf-88f5-34714c5ffe3a
+# ╠═16aa6f4a-3e95-4713-8cc9-6a6e9784d5cf
+# ╠═5736d5b1-7157-4460-b5fd-c91a06e335dc
+# ╠═8faafcf2-8114-4f67-9d77-94957dcb3ff3
+# ╠═e235fd07-7d3e-47f5-9f91-ef1f77f027aa
