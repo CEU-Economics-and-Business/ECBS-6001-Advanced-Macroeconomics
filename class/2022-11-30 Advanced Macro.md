@@ -87,7 +87,8 @@ FOC:
 $$
 \frac1c + \beta b(-1)\frac1{W-c} = 0
 $$
-or $$
+or 
+$$
 c =  (W-c) / (\beta b)
 $$
 $$
@@ -125,8 +126,6 @@ $$
 a = -\ln(1+\beta b) + \beta a + \beta b \ln(\beta b/(1+\beta b))
 $$
 Yes, we can solve this for $a$.
-
-
 
 ### Value function iteration
 Take the Bellman as an operator, not an equation. EQ:
@@ -204,7 +203,7 @@ General Bellman
 $$
 V(x_t) = \max_c E[u(x_t, c) + \beta V(x_{t+1})]
 $$
-or with deterministic
+or with deterministic utility,
 $$
 V(x_t) = \max_c u(x_t, c) + \beta EV(x_{t+1})
 $$
@@ -217,9 +216,9 @@ $$
 $$
 V(x) := \mathbf v
 $$
-is a K by 1 vector
+is a K by 1 vector. Bellman can be written in vector notation,
 $$
-\mathbf v = \mathbf u + \beta \mathbf P \mathbf v
+\mathbf v = \mathbf u + \beta \mathbf P \mathbf v.
 $$
 For state 1,
 $$
@@ -232,9 +231,11 @@ $$
 $$
 v_u = b +\beta [\pi_{21} v_e + \pi_{22} v_u]
 $$
+We can express the value as a function of utility, transition probabilities, and the discount factor,
 $$
-\mathbf v = (\mathbf I - \beta \mathbf P)^{-1}\mathbf u 
+\mathbf v = (\mathbf I - \beta \mathbf P)^{-1}\mathbf u. 
 $$
+
 
 ### With optimization
 $$
@@ -246,7 +247,7 @@ $$
 \mathbf v = (\mathbf I - \beta \mathbf P_c)^{-1}\mathbf u_c
 $$
 
-## Endogenous search
+## Endogenous job search
 Suppose firing probability fixed $\delta$. Job finding prb is $\Lambda(c)$ for $c>0$.
 $$
 \Lambda(c) = \frac {\lambda c}{1+\lambda c}
@@ -280,4 +281,9 @@ $$
 }
 $$
 for this to be a prob, we need $\beta\lambda(v_e - v_u)>1$. 
-### TODO: check second-order condition
+### Check second-order condition
+Take the second derivative of the objective function wrt $c$,
+$$
+\Lambda''(c)(v_e - v_u) < 0?
+$$
+In optiumum, the value gap will be positive, so we just have to check the second derivative of $\Lambda$. This will be negative if and only if $\Lambda(c)>0.5$. Otherwise, the logistic function is convex and the FOC characterizes a local *minimum*, not maximum. So we have to change our code to check if the predicted employment probability is greater than 0.5.

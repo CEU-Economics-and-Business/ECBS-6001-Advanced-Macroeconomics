@@ -19,7 +19,7 @@ $$
 	- is it independent of $\pi_0$?
 	- is it the same as $\pi_*$?
 If so, we call it the ergodic distribution of $P$. **Not every MC is ergodic.**
-> TODO: check exact definition of "ergodic"
+> [See here for more precise definition](https://brilliant.org/wiki/ergodic-markov-chains/).
 
 Two sufficient (but not necessary) conditions for convergence to a unique steady state, $\pi_\infty = \pi_*$.
 1. $P_{ij}>0$ for all $i,j$.
