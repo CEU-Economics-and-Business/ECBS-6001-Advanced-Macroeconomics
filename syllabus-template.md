@@ -9,7 +9,7 @@ Email |			{% for instructor in instructors %}{{ instructor.email }} {% endfor %}
 Office |			{% for instructor in instructors %}{{ instructor.office }} {% endfor %} by appointment
 Credits |			{{ credits.us }} US credits ({{ credits.ects }} ECTS credits)
 Module |		{{ module }}	
-Term |			{{ term }} 2022-2023
+Term |			{{ term }} 2023-2024
 Course level |		{% for l in level %}{{ l }} {% endfor %}
 Prerequisites |		{% for pre in prerequisites %}{{ pre }}, {% endfor %}
 Course drop	|
