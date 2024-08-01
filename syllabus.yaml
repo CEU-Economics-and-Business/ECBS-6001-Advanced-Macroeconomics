@@ -1,108 +1,92 @@
 code: ECBS 6001
 title: Advanced Macroeconomics
 instructors:
+    -   name: Zsófia L. Bárány
+        bio: Zsófia Bárány is associate professor at CEU. She is a macroeconomist interested in economic growth, technological change and its impact on the labor market. A large part of her work aims at understanding the driving forces behind long-run trends in the evolution of labor market outcomes, such as inequality, or job polarization, taking into account individual heterogeneity.
+        email: baranyzs@ceu.edu    
+        office: ""
     -   name: Miklós Koren
         bio: Miklós Koren is professor of economics at CEU, senior research fellow at the Institute of Economics, and research fellow of the Centre for Economic Policy Research. His research focuses on how talent and technology jointly determine business success. Professor Koren has more than two decades of experience with microeconometrics and quantitative macro modeling. He is a certified Carpentries Instructor.
         email: korenm@ceu.edu    
-        office: QS B510 (Vienna)
+        office: B510
 credits:
-    us: 2
-    ects: 4
+    us: 4
+    ects: 8
 module:  
-term: Fall
+term: Fall and Winter
 level: 
     - PhD
 prerequisites:
     - Master's level Macroeconomics
+    - This is a compulsory, core class for first-year PhD in Economics students and a compulsory class for second-year MA in Economics, Data and Policy students with a Research specialization.
 description:
-    content: The course introduces Markov processes and dynamic programming, two tools for forecasting dynamic processes and solving dynamic optimization problems. After introducing the key concepts and theoretical results, the tools will be immediately applied in quantitative computing using the Julia programming language.  
-    relevance: Markov processes and dynamic programming are key tools to solve dynamic economic problems and can be applied for stochastic growth models, industrial organization and structural labor economics. Julia is an efficient, fast and open source language for scientific computing, used widely in academia and policy analysis. 
+    content: "The course introduces two building blocks of macroeconomic modeling: forward-looking dynamic models and general equilibrium with heterogeneous agents. These tools are applied to problems of economic growth, labor market search, and industry dynamics. Quantitative model solutions are also illustrated using the Julia programming language."  
+    relevance: Dynamics and equilibrium are two building blocks of macroeconomic thinking. These approaches are essential for studying a wide range of problems in macroeconomics, labor economics, industrial organization, economic geography, international trade. 
 learning_outcomes:
-    - Use difference equations to characterize 2-dimensional dynamic systems.
-    - Solve for the steady-state of 2-dimensional linear dynamic systems.
-    - Characterize the stability of 2-dimensional linear dynamic systems. 
-    - Create plots in Julia.
-    - Understand the definition of Markov processes.
-    - Create functions in Julia.
-    - Simulate Markov processes in Julia.
-    - Understand the definition of Markov chains.
-    - Solve for ergodic distributions of Markov chains.
-    - Forecast Markov chains analytically.
-    - Apply arrays and matrix algebra in Julia.
-    - Simulate Markov chains in Julia.
-    - Understand the principle of dynamic programming.
-    - Derive the Bellman equation for several simple recursive problems.
-    - Solve for the value function using the guess and verify method.  
-    - Solve the Bellman equation using value function and policy function iteration.
-    - Understand contraction mappings.
-    - Use while loops in Julia numerical iteration.
-    - Solve the Ramsey growth model using dynamic programming.
-    - Solve the Diamond-Mortensen-Pissarides search model using dynamic programming.
+    - Analyze growth models including the Solow and Ramsey frameworks.
+    - Evaluate endogenous growth theories and their implications.
+    - Apply search and matching models to labor market analysis.
+    - Analyze industry equilibrium with heterogeneous firms.
+    - Understand the importance of input-output linkages in macroeconomic contexts.
+    - Solve dynamic programming problems and ordinary differential equations using Julia.
 learning_areas:
     - type: Critical thinking
       outcomes:
-        - Compare sequential and recursive formulation of dynamic optimization problems.
-        - Evaluate the limitations of Markov processes.
     - type: Quantitative reasoning
       outcomes:
-        - Use Markov processes for forecasting.
     - type: Technology skills
       outcomes:
-        - Install and use basic libraries in the Julia language.
-        - "Use key programming tools in Julia: functions, loops."
     - type: Interpersonal communication skills
       outcomes:
-        - Convey difficult concepts verbally.
     - type: Management knowledge and skills
       outcomes:
-        - Create software with many components.
-        - Organize work components effectively.
-        - Meet deadlines.
     - type: Cultural sensitivity and diversity
       outcomes:
-        - Work together with students of different backgrounds.
     - type: Ethics and social responsibility
       outcomes:
-        - ""
 readings:
     required:
-        - "Ljungqvist, Lars, Thomas J. Sargent. 2018. Recursive Macroeconomic Theory. 4th Edition. MIT Press. (earlier editions are also fine, but chapter numbering may be different)"
-        - "Caraiani, Petre. 2019. Introduction to Quantitative Macroeconomics Using Julia: From Basic to State-of-the-Art Computational Techniques. Academic Press. (Note that the code examples in the book use Julia 0.6. We will be using version 1.4, and discuss the necessary changes.)"
     recommended:
-        - "Stachurski, John. 2009. Economic dynamics: theory and computation. MIT Press."
-        - "Sargent, Thomas J. and John Stachurski. 2017. Quantitative economics with Julia [website], https://lectures.quantecon.org/"
 teaching_methods:
     - Conceptual lectures.
+    - Student presentations.
     - Live coding together with instructor.
     - Group discussion.
 assessments:
-    -   description: Class participation
-        weight: 20
-    -   description: Take-home problem
-        weight: 40
-    -   description: Take-home coding assignment
+    -   description: Weekly take-home assignments
+        weight: 60
+    -   description: End-of-year exam
         weight: 40
 technical_requirements:
     - Personal laptop computer with administrative privileges to install open source software.
     - "Operating system: Windows 10+ or Mac OS X 10.8+, or Linux 2.6.18+"
-    - Ability to install Julia 1.9, https://julialang.org/downloads/
+    - Ability to install Julia 1.10, https://julialang.org/downloads/
     - Internet access. 
 outline:
-    -   session: Classes 1-2
-        topic: Dynamic systems
-        reading: Caraiani (2019), Chapter 3.2. [Stachurski (2009), Chapter 4.1.]
-    -   session: Classes 3-4
-        topic: Markov processes
-        reading: Caraiani (2019), Chapter 1.
-    -   session: Classes 5-6
-        topic: Markov chains
-        reading: Ljungqvist and Sargent (2018), Chapter 2.
-    -   session: Classes 7-10
-        topic: Dynamic programming
-        reading: Caraiani (2019), Chapter 4. Ljungqvist and Sargent (2018), Chapters 3-4.
-    -   session: Class 11
-        topic: The Ramsey growth model
-        reading: Ljungqvist and Sargent (2018), Chapter 15.
-    -   session: Class 12
-        topic: The Diamond-Mortensen-Pissarides search model
-        reading: Ljungqvist and Sargent (2018), Chapter 29.
+    -   session: Weeks 1-2
+        topic: Growth facts, the Solow and the Ramsey model
+        reading: 
+    -   session: Weeks 3-5
+        topic: Overlapping generations model and introduction to dynamic programming
+        reading: 
+    -   session: Weeks 6-10
+        topic: Linear algebra, dynamic programming and ODEs in Julia
+        reading: 
+    -   session: Weeks 11-12
+        topic: Endogenous growth
+        reading: 
+    -   session: Weeks 13-16
+        topic: Search and matching models of the labor market
+        reading: 
+    -   session: Weeks 17-18
+        topic: Industry equilibrium models of heterogeneous firms
+        reading: 
+    -   session: Weeks 19-20
+        topic: The Hopenhayn model of industry dynamics
+        reading: 
+    -   session: Weeks 21-22
+        topic: Solving industry dynamics models in Julia
+        reading:
+    -   session: Weeks 23-24
+        topic: Input-output linkages
+        reading:

@@ -4,48 +4,34 @@
 --|--
 Course code |		ECBS 6001
 Course title |		Advanced Macroeconomics
-Instructor |		Miklós Koren 
-Email |			korenm@ceu.edu 
-Office |			QS B510 (Vienna)  by appointment
-Credits |			2 US credits (4 ECTS credits)
-Module |		None	
-Term |			Fall 2022-2023
+Instructor |		Zsófia L. Bárány Miklós Koren 
+Email |			baranyzs@ceu.edu korenm@ceu.edu 
+Office |			 B510  by appointment
+Credits |			4 US credits (8 ECTS credits)
+Module |		[]	
+Term |			Fall and Winter 2023-2024
 Course level |		PhD 
-Prerequisites |		Master's level Macroeconomics, 
+Prerequisites |		Master's level Macroeconomics, This is a compulsory, core class for first-year PhD in Economics students and a compulsory class for second-year MA in Economics, Data and Policy students with a Research specialization., 
 Course drop	|
 
 
 ## 1. Course Description
 ### Content
-The course introduces Markov processes and dynamic programming, two tools for forecasting dynamic processes and solving dynamic optimization problems. After introducing the key concepts and theoretical results, the tools will be immediately applied in quantitative computing using the Julia programming language.
+The course introduces two building blocks of macroeconomic modeling: forward-looking dynamic models and general equilibrium with heterogeneous agents. These tools are applied to problems of economic growth, labor market search, and industry dynamics. Quantitative model solutions are also illustrated using the Julia programming language.
 
 ### Relevance
-Markov processes and dynamic programming are key tools to solve dynamic economic problems and can be applied for stochastic growth models, industrial organization and structural labor economics. Julia is an efficient, fast and open source language for scientific computing, used widely in academia and policy analysis.
+Dynamics and equilibrium are two building blocks of macroeconomic thinking. These approaches are essential for studying a wide range of problems in macroeconomics, labor economics, industrial organization, economic geography, international trade.
 
 ## 2. Learning Outcomes
 ### Key outcomes
 By the end of the course, students will be able to
 
-* Use difference equations to characterize 2-dimensional dynamic systems.
-* Solve for the steady-state of 2-dimensional linear dynamic systems.
-* Characterize the stability of 2-dimensional linear dynamic systems.
-* Create plots in Julia.
-* Understand the definition of Markov processes.
-* Create functions in Julia.
-* Simulate Markov processes in Julia.
-* Understand the definition of Markov chains.
-* Solve for ergodic distributions of Markov chains.
-* Forecast Markov chains analytically.
-* Apply arrays and matrix algebra in Julia.
-* Simulate Markov chains in Julia.
-* Understand the principle of dynamic programming.
-* Derive the Bellman equation for several simple recursive problems.
-* Solve for the value function using the guess and verify method.
-* Solve the Bellman equation using value function and policy function iteration.
-* Understand contraction mappings.
-* Use while loops in Julia numerical iteration.
-* Solve the Ramsey growth model using dynamic programming.
-* Solve the Diamond-Mortensen-Pissarides search model using dynamic programming.
+* Analyze growth models including the Solow and Ramsey frameworks.
+* Evaluate endogenous growth theories and their implications.
+* Apply search and matching models to labor market analysis.
+* Analyze industry equilibrium with heterogeneous firms.
+* Understand the importance of input-output linkages in macroeconomic contexts.
+* Solve dynamic programming problems and ordinary differential equations using Julia.
 
 
 ### Other outcomes
@@ -53,30 +39,27 @@ The course will also help develop skills in the following areas.
 
 Learning Area | Learning Outcome
 --|--
-Critical thinking | Compare sequential and recursive formulation of dynamic optimization problems. Evaluate the limitations of Markov processes. 
-Quantitative reasoning | Use Markov processes for forecasting. 
-Technology skills | Install and use basic libraries in the Julia language. Use key programming tools in Julia: functions, loops. 
-Interpersonal communication skills | Convey difficult concepts verbally. 
-Management knowledge and skills | Create software with many components. Organize work components effectively. Meet deadlines. 
-Cultural sensitivity and diversity | Work together with students of different backgrounds. 
-Ethics and social responsibility |  
+Critical thinking | 
+Quantitative reasoning | 
+Technology skills | 
+Interpersonal communication skills | 
+Management knowledge and skills | 
+Cultural sensitivity and diversity | 
+Ethics and social responsibility | 
 
 
 ## 3. Reading List
 ### Required
-* Ljungqvist, Lars, Thomas J. Sargent. 2018. Recursive Macroeconomic Theory. 4th Edition. MIT Press. (earlier editions are also fine, but chapter numbering may be different)
-* Caraiani, Petre. 2019. Introduction to Quantitative Macroeconomics Using Julia: From Basic to State-of-the-Art Computational Techniques. Academic Press. (Note that the code examples in the book use Julia 0.6. We will be using version 1.4, and discuss the necessary changes.)
  
 
 ### Recommended
-* Stachurski, John. 2009. Economic dynamics: theory and computation. MIT Press.
-* Sargent, Thomas J. and John Stachurski. 2017. Quantitative economics with Julia [website], https://lectures.quantecon.org/
  
 
 ## 4. Teaching Method and Learning Activities
 Learning objectives will be achieved through
 
 * Conceptual lectures.
+* Student presentations.
 * Live coding together with instructor.
 * Group discussion.
 
@@ -84,16 +67,15 @@ Learning objectives will be achieved through
 ## 5. Assessment
 Grading will be based on the total score out of 100, in line with CEU’s standard grading guidelines.
 
-* Class participation (20 percent)
-* Take-home problem (40 percent)
-* Take-home coding assignment (40 percent)
+* Weekly take-home assignments (60 percent)
+* End-of-year exam (40 percent)
 
 
 ## 6. Technical requirements
 
 * Personal laptop computer with administrative privileges to install open source software.
 * Operating system: Windows 10+ or Mac OS X 10.8+, or Linux 2.6.18+
-* Ability to install Julia 1.6, https://julialang.org/downloads/#long_term_support_release
+* Ability to install Julia 1.10, https://julialang.org/downloads/
 * Internet access.
 
 
@@ -101,13 +83,16 @@ Grading will be based on the total score out of 100, in line with CEU’s standa
 
 Session | Topics | Readings
 --|--|--
-Classes 1-2 | Dynamic systems | Caraiani (2019), Chapter 3.2. [Stachurski (2009), Chapter 4.1.]
-Classes 3-4 | Markov processes | Caraiani (2019), Chapter 1.
-Classes 5-6 | Markov chains | Ljungqvist and Sargent (2018), Chapter 2.
-Classes 7-10 | Dynamic programming | Caraiani (2019), Chapter 4. Ljungqvist and Sargent (2018), Chapters 3-4.
-Class 11 | The Ramsey growth model | Ljungqvist and Sargent (2018), Chapter 15.
-Class 12 | The Diamond-Mortensen-Pissarides search model | Ljungqvist and Sargent (2018), Chapter 29.
+Weeks 1-2 | Growth facts, the Solow and the Ramsey model | []
+Weeks 3-5 | Overlapping generations model and introduction to dynamic programming | []
+Weeks 6-10 | Linear algebra, dynamic programming and ODEs in Julia | []
+Weeks 11-12 | Endogenous growth | []
+Weeks 13-16 | Search and matching models of the labor market | []
+Weeks 17-18 | Industry equilibrium models of heterogeneous firms | []
+Weeks 19-20 | The Hopenhayn model of industry dynamics | []
+Weeks 21-22 | Solving industry dynamics models in Julia | []
+Weeks 23-24 | Input-output linkages | []
 
 
 ## 8. Short Bio of the Instructor
-Miklós Koren is professor of economics at CEU, senior research fellow at the Institute of Economics, and research fellow of the Centre for Economic Policy Research. His research focuses on how talent and technology jointly determine business success. Professor Koren has more than two decades of experience with microeconometrics and quantitative macro modeling. He is a certified Carpentries Instructor.
+Zsófia Bárány is associate professor at CEU. She is a macroeconomist interested in economic growth, technological change and its impact on the labor market. A large part of her work aims at understanding the driving forces behind long-run trends in the evolution of labor market outcomes, such as inequality, or job polarization, taking into account individual heterogeneity.
