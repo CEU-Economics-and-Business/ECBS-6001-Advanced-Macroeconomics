@@ -136,6 +136,9 @@ P' * v1 == v1
 # ╔═╡ 7765f180-3931-48d5-8a84-484371859801
 md"But v1 is not a PMF!"
 
+# ╔═╡ 3d4fc526-582f-4f3e-903e-e9baa08cefa3
+π1 = v1 ./ sum(v1)
+
 # ╔═╡ 6f0e619f-7851-4b28-98a6-ac2c1f2aaa0b
 P' * π1 == π1
 
@@ -215,6 +218,9 @@ P
 # ╔═╡ 491f5020-51d9-4b06-9e76-3f9027d9675e
 λ2 = eigen(P').values[1]
 
+# ╔═╡ 885a3dfe-3646-4bd6-b65c-cfc77167a234
+π2 = eigen(P').vectors[:,1]
+
 # ╔═╡ f9d39d17-bfa6-4bc1-ab8b-fc97b017fdd9
 P' * (π1 + 0.1 * π2)
 
@@ -234,24 +240,6 @@ plot(
 
 # ╔═╡ 3e330d92-9419-481d-8d04-beeb365a305e
 
-
-# ╔═╡ 9a487dc6-0a91-461f-9643-fd255d9e7769
-# ╠═╡ disabled = true
-#=╠═╡
-π1 = P' * π0
-  ╠═╡ =#
-
-# ╔═╡ 48ed4fe5-314d-4f87-bd15-b98b0e4cc237
-# ╠═╡ disabled = true
-#=╠═╡
-π2 = P' * π1
-  ╠═╡ =#
-
-# ╔═╡ 3d4fc526-582f-4f3e-903e-e9baa08cefa3
-π1 = v1 ./ sum(v1)
-
-# ╔═╡ 885a3dfe-3646-4bd6-b65c-cfc77167a234
-π2 = eigen(P').vectors[:,1]
 
 # ╔═╡ Cell order:
 # ╠═d5af859a-6998-11ed-0a0c-71651f6b38fe
