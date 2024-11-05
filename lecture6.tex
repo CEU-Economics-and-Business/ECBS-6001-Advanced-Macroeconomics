@@ -209,16 +209,16 @@ with Bellman equation notation
 \begin{itemize}
 \item for the growth example guess that the solution takes the following form:
 \begin{displaymath}
-v(k)=\psi+\phi \ln(k)
+v(k)=A + B \ln(k)
 \end{displaymath}
-\item[] where $\psi$ and $\phi$ are constants for which we need to find solutions
+\item[] where $A$ and $B$ are constants for which we need to find solutions
 \item here the value function inherits the functional form of the utility function ($\ln$)
 \item to solve for the constants rewrite the Bellman equation as
 \begin{align*}
 v(k) & = \sup_{k_{+1}\in\Gamma(k)} \left\{ \ln(k^\alpha-k_{+1})+\beta v(k_{+1})\right\} \hspace{3 mm} \forall k \\
-\psi+\phi \ln(k) & = \sup_{k_{+1}\in\Gamma(k)} \left\{ \ln(k^\alpha-k_{+1})+\beta (\psi+\phi \ln(k_{+1}))\right\} \hspace{3 mm} \forall k
+A+B \ln(k) & = \sup_{k_{+1}\in\Gamma(k)} \left\{ \ln(k^\alpha-k_{+1})+\beta (A+B \ln(k_{+1}))\right\} \hspace{3 mm} \forall k
 \end{align*}
-\item[$\rightarrow$] verify that this functional form works and calculate $\psi$ and $\phi$ for Wednesday (January 10)
+\item[$\rightarrow$] verify that this functional form works and calculate $A$ and $B$ (Problem Set)
 \end{itemize}
 \end{frame}
 
@@ -268,38 +268,38 @@ v(x)=\sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta v(x_{+1}) \} \hspace{3 mm} \
 \end{displaymath}
 {\color{red!70!white}{the Bellman operator}}, operating on function $w$ is defined as
 \begin{displaymath}
-(Bw)(x)=\sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta w(x_{+1}) \} \hspace{3 mm} \forall x
+(\mathbf B w)(x)=\sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta w(x_{+1}) \} \hspace{3 mm} \forall x
 \end{displaymath}
 \begin{itemize}
 \item definition is expressed pointwise (for a value of $x$), but holds for all values of $x$
-\item operator $B$ maps a function $w$ to a new function $Bw$
-\item operator $B$ maps functions, it is referred to as a functional operator
-\item the argument of $B$, the function $w$, is not necessarily a solution to the Bellman equation
+\item operator $\mathbf B$ maps a function $w$ to a new function $\mathbf Bw$
+\item operator $\mathbf B$ maps functions, it is referred to as a functional operator
+\item the argument of $\mathbf B$, the function $w$, is not necessarily a solution to the Bellman equation
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \begin{itemize}
 \item let $v$ be a solution to the Bellman equation
-\item if $w=v$, then $Bv=v$
+\item if $w=v$, then $\mathbf Bv=v$
 \begin{align*}
-(Bv)(x) & = \sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta v(x_{+1}) \} \hspace{3 mm} \forall x \\
+(\mathbf Bv)(x) & = \sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta v(x_{+1}) \} \hspace{3 mm} \forall x \\
 & = v(x) \hspace{45 mm} \forall x \\
 \end{align*}
-\item the function $v$ is a fixed point of $B$, i.e.\ $B$ maps $v$ to $v$
+\item the function $v$ is a fixed point of $\mathbf B$, i.e.\ $\mathbf B$ maps $v$ to $v$
 \vspace{3 mm}
-\item[$\rightarrow$] the iterative solution methods for the Bellman equation pick some $v_0$ and analytically or numerically iterate $B^nv_0$ until convergence, until finding a fixed point
+\item[$\rightarrow$] the iterative solution methods for the Bellman equation pick some $v_0$ and analytically or numerically iterate $\mathbf B^nv_0$ until convergence, until finding a fixed point
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-how do you iterate $B^nw$?
+how do you iterate $\mathbf B^nw$?
 \begin{align*}
-(Bw)(x) & = \sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta w(x_{+1}) \} \\
-(B(Bw))(x) & = \sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta (Bw)(x_{+1}) \} \\
-(B(B^2w))(x) & = \sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta (B^2w)(x_{+1}) \} \\ 
+(\mathbf Bw)(x) & = \sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta w(x_{+1}) \} \\
+(\mathbf B(\mathbf Bw))(x) & = \sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta (\mathbf Bw)(x_{+1}) \} \\
+(\mathbf B(\mathbf B^2w))(x) & = \sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta (\mathbf B^2w)(x_{+1}) \} \\ 
 & \vdots \\
-(B(B^nw))(x) & = \sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta (B^nw)(x_{+1}) \} \\ 
+(\mathbf B(\mathbf B^nw))(x) & = \sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta (\mathbf B^nw)(x_{+1}) \} \\ 
 \end{align*}
 
 \end{frame}
@@ -307,35 +307,34 @@ how do you iterate $B^nw$?
 \begin{frame}
 what does it mean for functions to converge? 
 \begin{displaymath}
-\lim_{n\rightarrow \infty} B^nv_0=v
+\lim_{n\rightarrow \infty} \mathbf B^nv_0=v
 \end{displaymath}
 \begin{itemize}
 \item informally as $n$ gets large, the set of remaining elements in the sequence of functions
 \begin{displaymath}
-\{ B^nv_0, B^{n+1}v_0, B^{n+2}v_0, \ldots \}
+\{ \mathbf B^nv_0, \mathbf B^{n+1}v_0, \mathbf B^{n+2}v_0, \ldots \}
 \end{displaymath}
 are getting closer and closer
 \vspace{2 mm}
 \item two functions are close if the maximum distance between the functions is bounded by $\varepsilon$
 \vspace{2 mm}
-\item[$\rightarrow$] you will see examples for this soon
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Contraction mapping and Blackwell's Theorem}
 \begin{itemize}
-\item $B^nw$ converges as $n\rightarrow \infty$ because $B$ is a {\color{red!70!white}{contraction mapping}}
-\item $B$ is a contraction mapping if operating $B$ on any two functions moves them closer together
+\item $\mathbf B^nw$ converges as $n\rightarrow \infty$ because $\mathbf B$ is a {\color{red!70!white}{contraction mapping}}
+\item $\mathbf B$ is a contraction mapping if operating $\mathbf B$ on any two functions moves them closer together
 \vspace{3 mm}
-\item if $B$ is a contraction mapping, then 
+\item if $\mathbf B$ is a contraction mapping, then 
 	\begin{itemize}
-	\item $B$ has exactly one fixed point $v$
-	\item for any $v_0$, $\lim B^nv_o=v$
-	\item $B^nv_0$ has an exponential convergence rate 
+	\item $\mathbf B$ has exactly one fixed point $v$
+	\item for any $v_0$, $\lim \mathbf B^nv_o=v$
+	\item $\mathbf B^nv_0$ has an exponential convergence rate 
 	\end{itemize}
 \vspace{3 mm}
-\item Blackwell's Theorem gives sufficient (but not necessary) conditions for $B$ to be a contraction mapping
+\item Blackwell's Theorem gives sufficient (but not necessary) conditions for $\mathbf B$ to be a contraction mapping
 \vspace{3 mm}
 \item[$\Rightarrow$] if Blackwell's conditions are satisfied the Bellman equation can be solved using iterative methods
 \end{itemize}
