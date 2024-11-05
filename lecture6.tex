@@ -1,0 +1,561 @@
+\documentclass[compress,aspectratio=169]{beamer}
+\usepackage[latin1]{inputenc}
+\usepackage{natbib}
+\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{tikz}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{Advanced Macroeconomics }
+\subtitle{Lecture 6 - Introduction to dynamic programming}
+\author{Zs\'ofia L. B\'ar\'any}
+\institute{CEU}
+\date[]{\\2024 Fall}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+\begin{document}
+\def\newblock{\hskip .11em plus .33em minus .07em}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\begin{frame}{Two different approaches}
+consider the following problem:
+\begin{displaymath}
+\sup_{\{k_{t+1},c_t\}_{t=0}^{\infty}}\sum_{t=0}^{\infty}\beta^t u(c_t)
+\end{displaymath}
+subject to $k_{t+1}=f(k_t)+(1-\delta)k_t-c_t$, $k_{t+1}\geq 0$ for all $t$, $k_0$ given
+\vspace{3 mm}
+
+\begin{itemize}
+\item {\color{green!60!blue}{direct approach}}: set up the Lagrangian, find the two optimal infinite sequences $\{k_{t+1}\}_{t=0}^{\infty}$ and $\{c_t\}_{t=0}^{\infty}$
+\vspace{2 mm}
+\item {\color{red!70!white}{dynamic programming approach}}: find a {\color{red!70!white}{time-invariant policy function}} $h(\cdot)$ mapping wealth into optimal consumption, i.e.\ $c_t=h(k_t)$\\
+\item[] iterating together with $k_{t+1}=f(k_t)+(1-\delta)k_t-c_t$ starting from $k_0$ gives the two optimal sequences
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Potential advantages of dynamic programming}
+it is unclear that finding a policy function is easier than finding an infinite sequence, but it has three advantages:
+\vspace{3 mm}
+\begin{enumerate}
+\item sometimes we can find a closed-form solution for the policy function $h(\cdot)$
+\vspace{3 mm}
+\item sometimes we can characterize theoretical properties of the policy function $h(\cdot)$
+\vspace{3 mm}
+\item various numerical methods are available to solve dynamic programs
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{We will proceed by}
+\vspace{2 mm}
+\begin{itemize}
+\item[2.1] setting up the Sequence problem
+\vspace{2 mm}
+\item[2.2] the Bellman equation
+\vspace{2 mm}
+\item[2.3] solving the Bellman equation
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{2.1 Setting up}
+\begin{itemize}
+\item discrete time dynamic optimization
+\item infinite-horizon stationary problem 
+\end{itemize}
+\vspace{2 mm}
+
+{\textbf{\color{red!50!blue}{the sequence problem}}}: find $v(x)$ such that
+\begin{displaymath}
+v(x_0)=\sup_{\{x_{t+1}\}_{t=0}^{\infty}}\sum_{t=0}^{\infty}\beta^t F(x_t,x_{t+1})
+\end{displaymath}
+subject to $x_{t+1}\in \Gamma (x_t)$ {\color{gray}{(or $x_{+1} \in \Gamma(x)$)}}, with $x_0$ given \\
+\vspace{2 mm}
+
+where
+\begin{itemize}
+\item $x_t$ is the {\color{red!30!blue}{state vector}} at date $t$
+\item $F(x_t,x_{t+1})$ is the {\color{red!70!white}{flow payoff}} at date $t$ ($F$ is `stationary')
+\item $\beta$ is the {\color{green!70!blue}{exponential discount factor}}, $\beta^t$ is the exponential discount function
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example 1}
+optimal growth with log utility and Cobb-Douglas production function:
+
+\begin{displaymath}
+\sup_{\{k_{t+1},c_{t}\}_{t=0}^{\infty}}\sum_{t=0}^{\infty}\beta^t \ln(c_t)
+\end{displaymath}
+subject to the constraints: $c_t,k_t>0$ and $c_t+k_{t+1}=k_t^\alpha$, $k_0$ given
+
+\vspace{2 mm}
+Question: how do you formulate this as a sequence problem? \\
+{\footnotesize{\color{gray}{[Hint: eliminate redundant variables, and introduce the constraint function $\Gamma$]}}}
+
+\vspace{30 mm}
+\end{frame}
+
+\begin{frame}
+\frametitle{2.2 The Bellman equation}
+{\textbf{\color{red!40!blue}{the Bellman equation}}} expresses the value function as a combination of a flow payoff and a discounted continuation payoff
+\begin{displaymath}
+v(x)=\sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta v(x_{+1}) \} \hspace{3 mm} \forall x
+\end{displaymath}
+\vspace{2 mm}
+\begin{itemize}
+\item flow payoff is $F(x,x_{+1})$
+\vspace{2 mm}
+\item current value function is $v(x)$, continuation value function is $v(x_{+1})$
+\vspace{2 mm}
+\item equation holds for all feasible values of $x$
+\end{itemize}
+\vspace{4 mm}
+$\rightarrow$ compare {\color{red!40!yellow}{the sequence problem}} and {\color{red!40!blue}{the Bellman equation}}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item we call $v(\cdot)$ the solution to the Bellman equation
+\vspace{4 mm}
+\item not trivial to find
+\vspace{4 mm}
+\item we haven't even demonstrated yet that there exists a function $v(\cdot)$ that will satisfy the Bellman equation
+\vspace{4 mm}
+\item we will show that the (unique) value function defined by the sequence problem is also the unique solution to the Bellman equation
+\vspace{4 mm}
+\item once we determine the value function $v(x)$, we can solve for the optimal policy:
+\begin{displaymath}
+x_{+1}^*=\argmax_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta v(x_{+1}) \}
+\end{displaymath}
+\item[$\rightarrow$] $x_{+1}^*$ is a function of $x$: $h(x) \equiv x_{+1}^*$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+a solution to the sequence problem is also a solution to the Bellman equation
+\begin{align*}
+v(x_0) & = \sup_{x_{+1}\in \Gamma(x)}\sum_{t=0}^{\infty}\beta^t F(x_t,x_{t+1}) \\
+& = \sup_{x_{+1}\in \Gamma(x)} \left\{ F(x_0,x_1)+\sum_{t=1}^{\infty}\beta^t F(x_t,x_{t+1})\right\} \\
+& = \sup_{x_{+1}\in \Gamma(x)} \left\{ F(x_0,x_1)+\beta \sum_{t=1}^{\infty}\beta^{t-1} F(x_t,x_{t+1})\right\} \\
+& = \sup_{x_1\in \Gamma(x_0)} \left\{ F(x_0,x_1)+\beta \sup_{x_{+1}\in \Gamma(x)} \sum_{t=0}^{\infty}\beta^t F(x_{t+1},x_{t+2})\right\} \\
+& = \sup_{x_1\in \Gamma(x_0)} \left\{ F(x_0,x_1)+\beta v(x_1) \right\}
+\end{align*}
+\end{frame}
+
+\begin{frame}
+and vice versa: a solution to the Bellman equation is also a solution to the sequence problem
+\begin{align*}
+v(x_0) & = \sup_{x_1\in \Gamma(x_0)} \left\{ F(x_0,x_1)+\beta v(x_1)\right\} \\
+& = \sup_{x_{+1}\in \Gamma(x)} \left\{ F(x_0,x_1)+\beta\left[ F(x_1,x_2)+\beta v(x_2)\right]\right\} \\
+& = \sup_{x_{+1}\in \Gamma(x)} \left\{ F(x_0,x_1)+\beta F(x_1,x_2)+\beta^2\left[ F(x_2,x_3)+\beta v(x_3)\right]\right\} \\
+& \vdots \\
+& = \sup_{x_{+1}\in \Gamma(x)} \left\{ F(x_0,x_1)+\ldots+\beta^{n-1} F(x_{n-1},x_{n})+\beta^n v(x_n)\right\} \\
+& = \sup_{x_{+1}\in \Gamma(x)} \sum_{t=0}^{\infty} \beta^t F(x_t,x_{t+1})
+\end{align*}
+{\footnotesize{sufficient condition: $\lim_{n\rightarrow\infty} \beta^n v(x_n)=0$ for all feasible $x$ sequences}} \\
+
+\vspace{2 mm}
+$\Rightarrow$ put together: a solution of the Bellman equation will also be a solution to the sequence problem and vice versa
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Example 2}
+optimal growth (log utility and Cobb-Douglas):
+\begin{displaymath}
+\sup_{\{k_{t+1}c_{t}\}_{t=0}^{\infty}}\sum_{t=0}^{\infty}\beta^t \ln(c_t)
+\end{displaymath}
+subject to the constraints: $c_t,k_t>0$ and $c_t+k_{t+1}=k_t^\alpha$, $k_0$ given
+
+\vspace{2 mm}
+sequence problem formulation \\
+
+\vspace{18 mm}
+
+with Bellman equation notation
+
+\vspace{10 mm}
+\end{frame}
+
+\begin{frame}
+\frametitle{2.3 Solving the Bellman equation}
+\begin{itemize}
+\item three methods
+\vspace{3 mm}
+	\begin{itemize}
+	\item[1.] guess a solution and verify
+	\vspace{3 mm}
+	\item[2.] iterate a functional operator analytically
+	\vspace{3 mm}
+	\item[3.] iterate a functional operator numerically
+	\vspace{3 mm}
+	\end{itemize}
+\vspace{3 mm}
+\item[1.] in practice: guess a function $v(x)$ and then check to see that this function satisfies the Bellman equation at all possible values of $x$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example 3}
+\begin{itemize}
+\item for the growth example guess that the solution takes the following form:
+\begin{displaymath}
+v(k)=\psi+\phi \ln(k)
+\end{displaymath}
+\item[] where $\psi$ and $\phi$ are constants for which we need to find solutions
+\item here the value function inherits the functional form of the utility function ($\ln$)
+\item to solve for the constants rewrite the Bellman equation as
+\begin{align*}
+v(k) & = \sup_{k_{+1}\in\Gamma(k)} \left\{ \ln(k^\alpha-k_{+1})+\beta v(k_{+1})\right\} \hspace{3 mm} \forall k \\
+\psi+\phi \ln(k) & = \sup_{k_{+1}\in\Gamma(k)} \left\{ \ln(k^\alpha-k_{+1})+\beta (\psi+\phi \ln(k_{+1}))\right\} \hspace{3 mm} \forall k
+\end{align*}
+\item[$\rightarrow$] verify that this functional form works and calculate $\psi$ and $\phi$ for Wednesday (January 10)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item to solve such a problem, we need to use the first order condition (on the right hand side) of the Bellman equation:
+\begin{displaymath}
+\frac{\partial F(x,x_{+1})}{\partial x_{+1}}+\beta v'(x_{+1})=0
+\end{displaymath}
+\item and the envelope theorem
+\begin{displaymath}
+v'(x) = \frac{\partial F(x,x_{+1})}{\partial x}
+\end{displaymath}
+\item heuristic demonstration of the ET
+\begin{align*}
+v'(x) & = \frac{\partial F(x,x_{+1})}{\partial x}+\frac{\partial F(x,x_{+1})}{\partial x_{+1}}\frac{dx_{+1}}{dx}+\beta v'(x_{+1})\frac{dx_{+1}}{dx} \\
+& = \frac{\partial F(x,x_{+1})}{\partial x}+\underbrace{\left[ \frac{\partial F(x,x_{+1})}{\partial x_{+1}}+\beta v'(x_{+1})\right]}_{=0 \text{ from the FOC }}\frac{dx_{+1}}{dx}\\
+& = \frac{\partial F(x,x_{+1})}{\partial x}
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The FOC and the ET provide the Euler equation}
+\begin{itemize}
+\item forwarding the ET by one period we get
+\begin{displaymath}
+v'(x_{+1})=\frac{\partial F(x_{+1},x_{+2})}{\partial x_{+1}}
+\end{displaymath}
+\item plug this into the FOC
+\begin{align*}
+\frac{\partial F(x,x_{+1})}{\partial x_{+1}}+\beta v'(x_{+1})& =0 \\
+\frac{\partial F(x,x_{+1})}{\partial x_{+1}}+\beta \frac{\partial F(x_{+1},x_{+2})}{\partial x_{+1}}& =0
+\end{align*}
+\item in our growth example $F(x,x_{+1})=u (k^{\alpha}-k_{+1})=u(c)$ so the above becomes
+\begin{displaymath}
+u'(c)=\beta \underbrace{\alpha k_{+1}^{\alpha-1}}_{=R_{+1}} u'(c_{+1})
+\end{displaymath}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Iterative solutions to the Bellman equation}
+the Bellman equation
+\begin{displaymath}
+v(x)=\sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta v(x_{+1}) \} \hspace{3 mm} \forall x
+\end{displaymath}
+{\color{red!70!white}{the Bellman operator}}, operating on function $w$ is defined as
+\begin{displaymath}
+(Bw)(x)=\sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta w(x_{+1}) \} \hspace{3 mm} \forall x
+\end{displaymath}
+\begin{itemize}
+\item definition is expressed pointwise (for a value of $x$), but holds for all values of $x$
+\item operator $B$ maps a function $w$ to a new function $Bw$
+\item operator $B$ maps functions, it is referred to as a functional operator
+\item the argument of $B$, the function $w$, is not necessarily a solution to the Bellman equation
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item let $v$ be a solution to the Bellman equation
+\item if $w=v$, then $Bv=v$
+\begin{align*}
+(Bv)(x) & = \sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta v(x_{+1}) \} \hspace{3 mm} \forall x \\
+& = v(x) \hspace{45 mm} \forall x \\
+\end{align*}
+\item the function $v$ is a fixed point of $B$, i.e.\ $B$ maps $v$ to $v$
+\vspace{3 mm}
+\item[$\rightarrow$] the iterative solution methods for the Bellman equation pick some $v_0$ and analytically or numerically iterate $B^nv_0$ until convergence, until finding a fixed point
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+how do you iterate $B^nw$?
+\begin{align*}
+(Bw)(x) & = \sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta w(x_{+1}) \} \\
+(B(Bw))(x) & = \sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta (Bw)(x_{+1}) \} \\
+(B(B^2w))(x) & = \sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta (B^2w)(x_{+1}) \} \\ 
+& \vdots \\
+(B(B^nw))(x) & = \sup_{x_{+1}\in \Gamma(x)} \{F(x,x_{+1})+\beta (B^nw)(x_{+1}) \} \\ 
+\end{align*}
+
+\end{frame}
+
+\begin{frame}
+what does it mean for functions to converge? 
+\begin{displaymath}
+\lim_{n\rightarrow \infty} B^nv_0=v
+\end{displaymath}
+\begin{itemize}
+\item informally as $n$ gets large, the set of remaining elements in the sequence of functions
+\begin{displaymath}
+\{ B^nv_0, B^{n+1}v_0, B^{n+2}v_0, \ldots \}
+\end{displaymath}
+are getting closer and closer
+\vspace{2 mm}
+\item two functions are close if the maximum distance between the functions is bounded by $\varepsilon$
+\vspace{2 mm}
+\item[$\rightarrow$] you will see examples for this soon
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Contraction mapping and Blackwell's Theorem}
+\begin{itemize}
+\item $B^nw$ converges as $n\rightarrow \infty$ because $B$ is a {\color{red!70!white}{contraction mapping}}
+\item $B$ is a contraction mapping if operating $B$ on any two functions moves them closer together
+\vspace{3 mm}
+\item if $B$ is a contraction mapping, then 
+	\begin{itemize}
+	\item $B$ has exactly one fixed point $v$
+	\item for any $v_0$, $\lim B^nv_o=v$
+	\item $B^nv_0$ has an exponential convergence rate 
+	\end{itemize}
+\vspace{3 mm}
+\item Blackwell's Theorem gives sufficient (but not necessary) conditions for $B$ to be a contraction mapping
+\vspace{3 mm}
+\item[$\Rightarrow$] if Blackwell's conditions are satisfied the Bellman equation can be solved using iterative methods
+\end{itemize}
+\end{frame}
+
+
+%
+%\begin{frame}
+%\frametitle{Short, informal introduction to dynamic programming}
+%Consider the following consumption-saving problem:
+%\begin{align*}
+%&\sum_{t=0}^\infty \beta^tu(c_t) \\
+%\text{s.t.}\hspace{2 mm}  & a_{t+1}=(1+r)a_t-c_t \hspace{1mm} \text{for all} \hspace{1 mm} t\geq 0\\
+%& a_{t+1}\geq 0 \hspace{1 mm} \text{for all}  \hspace{1 mm} t\geq 0, \hspace{1 mm} \text{for a given} \hspace{1 mm} a_0>0
+%\end{align*}
+%\underline{direct approach:} set up the Lagrangian, and find the two infinite optimal sequences $\{a_{t+1}\}_{t=0}^\infty$ and $\{c_{t}\}_{t=0}^\infty$ \\
+%\vspace{2 mm} 
+%
+%\underline{dynamic programming approach:} find a time-invariant \textbf{policy function} $h$ mapping wealth at the beginning of period $t$ into optimal consumption in period $t$, s.t. the sequence $\{c_{t}\}_{t=0}^\infty$ generated by iterating 
+%\begin{align*}
+%c_t& =h(a_t) \\
+%a_{t+1}& =(1+r)a_t-c_t
+%\end{align*}
+%starting from $a_0$ solves the consumption-saving problem
+%\end{frame}
+%
+%
+%\begin{frame}
+%\frametitle{The value function}
+%we first need to solve for an auxiliary function called the \textbf{value function}, $V(a)$, which measures the optimal lifetime utility from consumption starting with an initial wealth $a$:
+%\begin{displaymath}
+%V(a_0)\equiv \max_{\{c_t,a_{t+1}\}_{t=0}^\infty} \sum_{t=0}^\infty \beta^tu(c_t)
+%\end{displaymath}
+%such that for all $t\geq 0$
+%\begin{align*}
+%a_{t+1}& = (1+r)a_t-c_t \\
+%a_{t+1}& \geq 0
+%\end{align*}
+%we need to determine the value function
+%\end{frame}
+%
+%\begin{frame}
+%To determine the value function:
+%\begin{itemize}
+%\item we show that the value function is the solution to a particular functional equation called the \textbf{Bellman equation} \\
+%	\underline{note:} not all optimization problems can be represented with a Bellman equation
+%\item the problem must satisfy the \textbf{Principle of Optimality}
+%\item which applies only to problems with a \textbf{recursive structure}
+%\end{itemize}
+%The value function can be expressed as:
+%\begin{displaymath}
+%V(a_0)= \max_{\{0\leq c_t\leq (1+r)a_{t}\}_{t=0}^\infty} \sum_{t=0}^\infty \beta^tu(c_t)
+%\end{displaymath}
+%such that for all $t \geq 0$
+%\begin{displaymath}
+%a_{t+1}=(1+r)a_t-c_t 
+%\end{displaymath}
+%let $\Gamma(a)\equiv[0,(1+r)a]$
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Heuristic procedure}
+%\begin{align*}
+%\only<1>{
+%\hspace{-6 mm}V(a_0) & = \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} \sum_{t=0}^\infty \beta^tu((1+r)a_t-a_{t+1}) \\
+%\hspace{-6 mm}\color{white}{V(a_0)} & \color{white}{= \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} [u((1+r)a_0-a_1)+\beta\sum^\infty_{t=1} \beta^{t-1}u((1+r)a_{t}-a_{t+1})]}\\
+%\hspace{-6 mm}\color{white}{V(a_0)} & \color{white}{= \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} [u((1+r)a_0-a_1)+\beta  \sum^\infty_{t=0}\beta^{t}u((1+r)a_{t+1}-a_{t+2})]} \\
+%\hspace{-6 mm}\color{white}{V(a_0)}& \color{white}{= \max_{a_{1}\in\Gamma(a_{0})} [u((1+r)a_0-a_1) +}\\
+%& \color{white}{\max_{\{a_{t+2}\in\Gamma(a_{t+1})\}_{t=0}^\infty}\beta \sum_{t=0}^\infty \beta^{t}u((1+r)a_{t+1}-a_{t+2})]} \\
+%\hspace{-6 mm}\color{white}{V(a_0)} & \color{white}{= \max_{a_{1}\in\Gamma(a_{0})} [u((1+r)a_0-a_1) +\beta V(a_1)]} \\
+%\hspace{-6 mm}\color{white}{V(a_0)} & \color{white}{= \max_{c_{0}\in\Gamma(a_{0})} [u(c_0) +\beta V((1+r)a_0-c_0)]}}
+%\only<2>{
+%\hspace{-6 mm}V(a_0) & = \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} \sum^\infty _{\color{red}{t=0}}\beta^tu((1+r)a_t-a_{t+1}) \\
+%\hspace{-6 mm}V(a_0) & = \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} [\color{red}{u((1+r)a_0-a_1)}\color{black}{+}\color{red}{\beta}\color{black}{ \sum^\infty}_{\color{red}{t=1}} \beta^{\color{red}{t-1}}u((1+r)a_t-a_{t+1})]\\
+%\hspace{-6 mm}\color{white}{V(a_0)} & \color{white}{= \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} [u((1+r)a_0-a_1)+\beta  \sum^\infty_{t=0}\beta^{t}u((1+r)a_{t+1}-a_{t+2})]} \\
+%\hspace{-6 mm}\color{white}{V(a_0)}& \color{white}{= \max_{a_{1}\in\Gamma(a_{0})} [u((1+r)a_0-a_1) +}\\
+%& \color{white}{\max_{\{a_{t+2}\in\Gamma(a_{t+1})\}_{t=0}^\infty}\beta \sum_{t=0}^\infty \beta^{t}u((1+r)a_{t+1}-a_{t+2})]} \\
+%\hspace{-6 mm}\color{white}{V(a_0)} & \color{white}{= \max_{a_{1}\in\Gamma(a_{0})} [u((1+r)a_0-a_1) +\beta V(a_1)]} \\
+%\hspace{-6 mm}\color{white}{V(a_0)} & \color{white}{= \max_{c_{0}\in\Gamma(a_{0})} [u(c_0) +\beta V((1+r)a_0-c_0)]}}
+%\only<3>{
+%\hspace{-6 mm}V(a_0) & = \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} \sum^\infty _{t=0}\beta^tu((1+r)a_t-a_{t+1}) \\
+%\hspace{-6 mm}V(a_0) & = \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} [u((1+r)a_0-a_1)+\beta\sum^\infty_{\color{blue}{t=1}} \beta^{\color{blue}{t-1}}u((1+r)a_{\color{blue}{t}}-a_{\color{blue}{t+1}})]\\
+%\hspace{-6 mm}V(a_0) & = \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} [u((1+r)a_0-a_1)+\beta  \sum^\infty_{\color{blue}{t=0}}\beta^{\color{blue}{t}}u((1+r)a_{\color{blue}{t+1}}-a_{\color{blue}{t+2}})] \\
+%\hspace{-6 mm}\color{white}{V(a_0)}& \color{white}{= \max_{a_{1}\in\Gamma(a_{0})} [u((1+r)a_0-a_1) +}\\
+%& \color{white}{\max_{\{a_{t+2}\in\Gamma(a_{t+1})\}_{t=0}^\infty}\beta \sum_{t=0}^\infty \beta^{t}u((1+r)a_{t+1}-a_{t+2})]} \\
+%\hspace{-6 mm}\color{white}{V(a_0)} & \color{white}{= \max_{a_{1}\in\Gamma(a_{0})} [u((1+r)a_0-a_1) +\beta V(a_1)]} \\
+%\hspace{-6 mm}\color{white}{V(a_0)} & \color{white}{= \max_{c_{0}\in\Gamma(a_{0})} [u(c_0) +\beta V((1+r)a_0-c_0)]}}
+%\only<4>{
+%\hspace{-6 mm}V(a_0) & = \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} \sum^\infty _{t=0}\beta^tu((1+r)a_t-a_{t+1}) \\
+%\hspace{-6 mm}V(a_0) & = \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} [u((1+r)a_0-a_1)+\beta\sum^\infty_{t=1} \beta^{t-1}u((1+r)a_{t}-a_{t+1})]\\
+%\hspace{-6 mm}V(a_0) & = \max_{\color{red}{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty}} [u((1+r)a_0-a_1)+\beta  \sum^\infty_{t=0}\beta^{t}u((1+r)a_{t+1}-a_{t+2})] \\
+%\hspace{-6 mm}V(a_0) & = \max_{\color{red}{a_{1}\in\Gamma(a_{0})}} [u((1+r)a_0-a_1) +\\
+%& \max_{\color{red}{\{a_{t+2}\in\Gamma(a_{t+1})\}_{t=0}^\infty}}\beta \sum_{t=0}^\infty \beta^{t}u((1+r)a_{t+1}-a_{t+2})] \\
+%\hspace{-6 mm}\color{white}{V(a_0)} & \color{white}{= \max_{a_{1}\in\Gamma(a_{0})} [u((1+r)a_0-a_1) +\beta V(a_1)]} \\
+%\hspace{-6 mm}\color{white}{V(a_0)} & \color{white}{= \max_{c_{0}\in\Gamma(a_{0})} [u(c_0) +\beta V((1+r)a_0-c_0)]}}
+%\only<5>{
+%\hspace{-6 mm}V(a_0) & = \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} \sum^\infty _{t=0}\beta^tu((1+r)a_t-a_{t+1}) \\
+%\hspace{-6 mm}V(a_0) & = \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} [u((1+r)a_0-a_1)+\beta\sum^\infty_{t=1} \beta^{t-1}u((1+r)a_{t}-a_{t+1})]\\
+%\hspace{-6 mm}V(a_0) & = \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} [u((1+r)a_0-a_1)+\beta  \sum^\infty_{t=0}\beta^{t}u((1+r)a_{t+1}-a_{t+2})] \\
+%\hspace{-6 mm}V(a_0) & = \max_{a_{1}\in\Gamma(a_{0})} [u((1+r)a_0-a_1) +\\
+%& \color{blue}{\max_{\{a_{t+2}\in\Gamma(a_{t+1})\}_{t=0}^\infty}}\color{black}{\beta} \color{blue}{\sum_{t=0}^\infty \beta^{t}u((1+r)a_{t+1}-a_{t+2})}\color{black}{]} \\
+%\hspace{-6 mm}V(a_0) & = \max_{a_{1}\in\Gamma(a_{0})} [u((1+r)a_0-a_1) +\beta \color{blue}{V(a_1)}\color{black}{]} \\
+%\hspace{-6 mm}\color{white}{V(a_0)} & \color{white}{= \max_{c_{0}\in\Gamma(a_{0})} [u(c_0) +\beta V((1+r)a_0-c_0)]}}
+%\only<6>{
+%\hspace{-6 mm}V(a_0) & = \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} \sum^\infty _{t=0}\beta^tu((1+r)a_t-a_{t+1}) \\
+%\hspace{-6 mm}V(a_0) & = \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} [u((1+r)a_0-a_1)+\beta\sum^\infty_{t=1} \beta^{t-1}u((1+r)a_{t}-a_{t+1})]\\
+%\hspace{-6 mm}V(a_0) & = \max_{\{a_{t+1}\in\Gamma(a_{t})\}_{t=0}^\infty} [u((1+r)a_0-a_1)+\beta  \sum^\infty_{t=0}\beta^{t}u((1+r)a_{t+1}-a_{t+2})] \\
+%\hspace{-6 mm}V(a_0) & = \max_{a_{1}\in\Gamma(a_{0})} [u((1+r)a_0-a_1) +\\
+%& \max_{\{a_{t+2}\in\Gamma(a_{t+1})\}_{t=0}^\infty}\beta \sum_{t=0}^\infty \beta^{t}u((1+r)a_{t+1}-a_{t+2})] \\
+%\hspace{-6 mm}V(a_0) & = \max_{\color{red}{a_{1}}\color{black}{\in}\Gamma(a_{0})} [u(\color{red}{(1+r)a_0-a_1}\color{black}{)} +\beta V(\color{red}{a_1}\color{black}{)}] \\
+%\hspace{-6 mm}V(a_0) & = \max_{\color{red}{c_{0}}\color{black}{\in}\Gamma(a_{0})} [u(\color{red}{c_0}\color{black}{)} +\beta V(\color{red}{(1+r)a_0-c_0}\color{black}{)}]}
+%\end{align*}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{The recursive formulation}
+%\begin{itemize}
+%\item this heuristic procedure seems reasonable
+%\item formally it is valid, because the Principle of Optimality applies to the problem
+%\item the Principle of Optimality tells us that the value function defined before can be rewritten as
+%\end{itemize}
+%
+%\begin{displaymath}
+%V(a)=\max_{c \in[0,(1+r)a]} [u(c) +\beta V((1+r)a-c)] 
+%\end{displaymath}
+%
+%$\rightarrow$ recursive formulation of the optimization problem \\
+%$\rightarrow$ once we determine the value function $V(a)$, we can solve for the optimal consumption level:
+%\begin{displaymath}
+%c^*=\argmax_{c\in[0,(1+r)a]}u(c)+\beta V((1+r)a-c)
+%\end{displaymath}
+%$\rightarrow$ $c^*$ is a function of $a$: $h(a) \equiv c^*$
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Solving the optimization problem with dynamic programming}
+%\vspace{-3 mm}
+%This has 5 steps:\\
+%\vspace{2 mm}
+%\begin{enumerate}
+%\item write down the Bellman equation (the definition of the value function)
+%\item write down the first order conditions of the optimization problem
+%\item write down the Benveniste-Scheinkman equation (the envelope condition) to determine the derivative of the value function wrt wealth
+%\item apply the envelope condition to the next period's value function and wealth
+%\item derive the Euler equation, which summarizes the optimal intertemporal behavior of consumption 
+%\end{enumerate}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Step 1: the Bellman equation}
+%\begin{displaymath}
+%V(a)=\max_{c \in[0,(1+r)a]} [u(c) +\beta V((1+r)a-c)] 
+%\end{displaymath}
+%\begin{itemize}
+%\item a functional equation, the unknown is the function $V$ itself \\
+%	this is the Bellman equation, let's assume for now that a solution to this problem exists
+%\item $a$ is a \textbf{state variable}: it contains all the information from the past that is needed to solve the forward-looking optimization problem
+%\item $c$ is a \textbf{control variable}: this is to be chosen in the current period\\
+%	it determines the state variable's next period value, $a'$, according to the \textbf{transition equation}
+%	\begin{displaymath}
+%	a'=(1+r)a-c
+%	\end{displaymath}
+%\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}
+%\frametitle{Step 2: the FOC}
+%first rewrite the Bellman equation $\rightarrow$ we choose $a'$ rather than $c$
+%\begin{displaymath}
+%V(a)=\max_{a' \in[0,(1+r)a]} [u((1+r)a-a') +\beta V(a')] 
+%\end{displaymath}
+%$\rightarrow$ this is useful for the envelope condition \\
+%$\rightarrow$ let's assume $V$ exists and is differentiable \\
+%\vspace{2 mm}
+%
+%The FOC wrt to $a'$:
+%\begin{align*}
+%\frac{d V}{d a'}(a) & =-\frac{\partial u}{\partial c}((1+r)a-a')+\beta\frac{\partial V}{\partial a}(a')=0 \\
+%\frac{\partial u}{\partial c}(c)& =\beta\frac{\partial V}{\partial a}(a')
+%\end{align*}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Step 3 \& 4: the Envelope Condition \& one step forward}
+%we need to determine $\partial V/\partial a$ for the first order condition
+%\begin{displaymath}
+%V(a)=\max_{a' \in[0,(1+r)a]} [u((1+r)a-a') +\beta V(a')] 
+%\end{displaymath}
+%\vspace{-5mm}
+%\begin{align*}
+%\frac{\partial V}{\partial a}(a) & =\frac{\partial u}{\partial c}(c)\left((1+r)-\frac{d a'}{da}\right)+\beta \frac{\partial V}{\partial a}(a')\frac{d a'}{da} \\
+%&= \frac{\partial u}{\partial c}(c)(1+r)+\frac{d a'}{da}\underbrace{\left(-\frac{\partial u}{\partial c}(c)+\beta \frac{\partial V}{\partial a}(a')\right)}_{=0\text{ due to the FOC} } \\
+%\color{blue}{\frac{\partial V}{\partial a}(a)} & \hspace{1 mm}\color{blue}{= \frac{\partial u}{\partial c}(c)(1+r)}
+%\end{align*}
+%this holds in all periods, so forwarding by one period:
+%\begin{displaymath}
+%\frac{\partial V}{\partial a}(a') = \frac{\partial u}{\partial c}(c')(1+r)
+%\end{displaymath}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Step 5: the Euler equation}
+%we plug
+%\begin{displaymath}
+%\frac{\partial V}{\partial a}(a') = \frac{\partial u}{\partial c}(c')(1+r)
+%\end{displaymath}
+%into 
+%\begin{displaymath}
+%\frac{\partial u}{\partial c}(c) =\beta\frac{\partial V}{\partial a}(a')
+%\end{displaymath}
+%to get
+%\begin{align*}
+%\frac{\partial u}{\partial c}(c) & =\beta\frac{\partial u}{\partial c}(c')(1+r) \\
+%u'(c)& = \beta (1+r)u'(c')
+%\end{align*}
+%the optimization problem can thus be reduced to finding $h(a)$ for all $a$ such that:
+%\begin{displaymath}
+%\frac{\partial u}{\partial c}(h(a)) =\beta(1+r)\frac{\partial u}{\partial c}(h((1+r)a-h(a)))
+%\end{displaymath}
+%\end{frame}
+
+\end{document}

@@ -1,0 +1,151 @@
+\documentclass[12pt]{article}
+
+% Packages for formatting
+\usepackage[T1]{fontenc}
+\usepackage{times}  % Times New Roman font
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}  % For line spacing
+\usepackage[margin=1in]{geometry}  % Smaller margins
+\usepackage{amsmath, amssymb, amsfonts}  % Math packages
+\usepackage{mathptmx}  % Times New Roman for math mode
+\usepackage{microtype}  % Better typography
+\usepackage{parskip}  % Better paragraph spacing
+
+% Set line spacing to 1.5
+\onehalfspacing
+
+% Custom theorem environments
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+% Title formatting
+\usepackage{titling}
+\setlength{\droptitle}{-4em}
+\title{CEU -- Advanced Macroeconomics\\Problem Set 6 -- Solutions}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Question 1 -- Dynamic Programming Fundamentals}
+
+a. The sequence problem formulation is:
+\[
+v(k_0) = \sup_{\{k_{t+1}\}_{t=0}^{\infty}} \sum_{t=0}^{\infty} \beta^t \ln(Rk_t - k_{t+1})
+\]
+subject to:
+\[
+0 \leq k_{t+1} \leq Rk_t \text{ for all } t \geq 0
+\]
+\[
+k_0 \text{ given}
+\]
+
+b. The Bellman equation is:
+\[
+v(k) = \sup_{0 \leq k_{+1} \leq Rk} \{\ln(Rk - k_{+1}) + \beta v(k_{+1})\}
+\]
+
+c. Using the guess $v(k) = A + B\ln(k)$:
+
+i. The first-order condition is:
+\[
+-\frac{1}{Rk - k_{+1}} + \beta \frac{B}{k_{+1}} = 0
+\]
+
+ii. The envelope condition is:
+\[
+v'(k) = \frac{B}{k} = \frac{R}{Rk - k_{+1}}
+\]
+
+iii. From the FOC, we can solve for $k_{+1}$:
+\[
+k_{+1} = \frac{\beta B}{1 + \beta B}Rk
+\]
+
+Substituting this back into the Bellman equation:
+\[
+A + B\ln(k) = \ln\left(Rk\left(1 - \frac{\beta B}{1 + \beta B}\right)\right) + \beta\left(A + B\ln\left(\frac{\beta B}{1 + \beta B}Rk\right)\right)
+\]
+
+Collecting terms:
+\[
+A + B\ln(k) = \ln(R) + \ln(k) + \ln\left(\frac{1}{1 + \beta B}\right) + \beta A + \beta B\ln(\beta B) + \beta B\ln(R) + \beta B\ln(k) - \beta B\ln(1 + \beta B)
+\]
+
+Matching coefficients:
+\[
+B = 1 + \beta B \implies B = \frac{1}{1-\beta}
+\]
+\[
+A = \ln(R) + \ln\left(\frac{1}{1 + \beta B}\right) + \beta A + \beta B\ln(\beta B) + \beta B\ln(R) - \beta B\ln(1 + \beta B)
+\]
+
+iv. The optimal policy function for consumption is:
+\[
+c = (1-\beta)Rk
+\]
+
+d. To verify the transversality condition:
+\[
+\lim_{t \to \infty} \beta^t v'(k_t)k_t = \lim_{t \to \infty} \beta^t \frac{B}{k_t}k_t = \lim_{t \to \infty} \beta^t \frac{1}{1-\beta} = 0
+\]
+since $\beta < 1$.
+
+\vspace{0.5cm}
+\noindent\textbf{Question 2 -- Properties of the Bellman Operator}
+
+a. Let $w_1(x) \leq w_2(x)$ for all $x$. Then:
+\[
+(Bw_1)(x) = \sup_{x_{+1} \in \Gamma(x)} \{F(x,x_{+1}) + \beta w_1(x_{+1})\} \leq \sup_{x_{+1} \in \Gamma(x)} \{F(x,x_{+1}) + \beta w_2(x_{+1})\} = (Bw_2)(x)
+\]
+The inequality follows because for any $x_{+1}$, $w_1(x_{+1}) \leq w_2(x_{+1})$, so the supremum must also be smaller.
+
+b. For any constant $a$:
+\begin{align*}
+B(w + a)(x) &= \sup_{x_{+1} \in \Gamma(x)} \{F(x,x_{+1}) + \beta(w(x_{+1}) + a)\} \\
+&= \sup_{x_{+1} \in \Gamma(x)} \{F(x,x_{+1}) + \beta w(x_{+1})\} + \beta a \\
+&= (Bw)(x) + \beta a
+\end{align*}
+
+c. These properties are important because:
+\begin{itemize}
+\item Monotonicity ensures that if we start with a function that's below the true value function, iterations will increase it, and if we start above, iterations will decrease it.
+\item Discounting ensures that the distance between successive iterations shrinks by at least factor $\beta$, guaranteeing convergence.
+\end{itemize}
+
+\vspace{0.5cm}
+\noindent\textbf{Question 3 -- Analytical Value Function Iteration}
+
+a. Starting with $v_0(k) = 0$:
+
+i. $(Bv_0)(k) = \sup_{0 \leq k_{+1} \leq k} \{\ln(k - k_{+1}) + \beta \cdot 0\} = \ln(k)$
+
+ii. $(B^2v_0)(k) = \sup_{0 \leq k_{+1} \leq k} \{\ln(k - k_{+1}) + \beta \ln(k_{+1})\}$
+\[
+= \ln(k) + \beta\ln(\beta k)
+\]
+
+iii. $(B^3v_0)(k) = \ln(k) + \beta\ln(\beta k) + \beta^2\ln(\beta^2 k)$
+
+b. The pattern appears to be:
+\[
+(B^nv_0)(k) = \sum_{i=0}^{n-1} \beta^i \ln(\beta^i k)
+\]
+
+c. As $n \to \infty$, the limit function should be:
+\[
+v(k) = \sum_{i=0}^{\infty} \beta^i \ln(\beta^i k) = \frac{\ln(k)}{1-\beta} + \text{constant}
+\]
+
+To verify this satisfies the Bellman equation, substitute it back and solve the maximization problem:
+\[
+\frac{\partial}{\partial k_{+1}} \left[\ln(k - k_{+1}) + \beta\left(\frac{\ln(k_{+1})}{1-\beta} + \text{constant}\right)\right] = 0
+\]
+This gives the optimal policy $k_{+1} = \beta k$, which is consistent with our iteration results.
+
+\end{document}

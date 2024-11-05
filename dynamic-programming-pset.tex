@@ -1,0 +1,106 @@
+\documentclass[12pt]{article}
+
+% Packages for formatting
+\usepackage[T1]{fontenc}
+\usepackage{times}  % Times New Roman font
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}  % For line spacing
+\usepackage[margin=1in]{geometry}  % Smaller margins
+\usepackage{amsmath, amssymb, amsfonts}  % Math packages
+\usepackage{mathptmx}  % Times New Roman for math mode
+\usepackage{microtype}  % Better typography
+\usepackage{parskip}  % Better paragraph spacing
+
+% Set line spacing to 1.5
+\onehalfspacing
+
+% Custom theorem environments
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+% Title formatting
+\usepackage{titling}
+\setlength{\droptitle}{-4em}
+\title{CEU -- Advanced Macroeconomics\\Problem Set 6}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Question 1 -- Dynamic Programming Fundamentals}
+
+Consider a simple infinite-horizon consumption problem where the agent maximizes:
+
+\[
+\sup_{\{c_t\}_{t=0}^{\infty}} \sum_{t=0}^{\infty} \beta^t \ln(c_t)
+\]
+
+subject to:
+\[
+k_{t+1} = Rk_t - c_t
+\]
+\[
+k_t \geq 0, c_t \geq 0 \text{ for all } t
+\]
+\[
+k_0 \text{ given}
+\]
+
+where $R > 1$ is the gross interest rate.
+
+a. Write down the sequence problem formulation for this optimization problem.
+
+b. Write down the corresponding Bellman equation.
+
+c. Guess that the value function takes the form $v(k) = A + B\ln(k)$ where $A$ and $B$ are constants. Using this guess:
+   i. Write down the first-order condition
+   ii. Write down the envelope condition
+   iii. Solve for the constants $A$ and $B$
+   iv. Derive the optimal policy function for consumption
+
+d. Verify that your solution satisfies the transversality condition.
+
+\vspace{0.5cm}
+\noindent\textbf{Question 2 -- Properties of the Bellman Operator}
+
+Consider the Bellman operator $B$ defined as:
+
+\[
+(Bw)(x) = \sup_{x_{+1} \in \Gamma(x)} \{F(x,x_{+1}) + \beta w(x_{+1})\}
+\]
+
+a. Let $w_1$ and $w_2$ be two different functions. Show that if $w_1(x) \leq w_2(x)$ for all $x$, then $(Bw_1)(x) \leq (Bw_2)(x)$ for all $x$ (monotonicity).
+
+b. Let $w$ be a function and $a$ be a constant. Show that:
+\[
+B(w + a)(x) = (Bw)(x) + \beta a
+\]
+(discounting)
+
+c. Explain why these two properties (monotonicity and discounting) are important for proving that the Bellman operator is a contraction mapping.
+
+\vspace{0.5cm}
+\noindent\textbf{Question 3 -- Analytical Value Function Iteration}
+
+Consider a simplified version of the growth model where:
+\[
+F(k,k_{+1}) = \ln(k - k_{+1})
+\]
+\[
+\Gamma(k) = \{k_{+1}: 0 \leq k_{+1} \leq k\}
+\]
+
+a. Start with the initial guess $v_0(k) = 0$ for all $k$. Calculate:
+   i. $(Bv_0)(k)$
+   ii. $(B^2v_0)(k)$
+   iii. $(B^3v_0)(k)$
+
+b. Based on your calculations in part (a), conjecture a pattern for $(B^nv_0)(k)$ as $n \to \infty$.
+
+c. Verify that your conjectured limit function satisfies the Bellman equation.
+
+\end{document}
