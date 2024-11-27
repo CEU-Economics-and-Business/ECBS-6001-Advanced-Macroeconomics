@@ -1,0 +1,82 @@
+\documentclass[12pt]{article}
+
+% Packages for formatting
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{listings}
+
+\onehalfspacing
+
+\title{\Large CEU -- Advanced Macroeconomics\\[0.5em]Problem Set 7}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Value Function Iteration in Julia} (20 points)
+
+Consider a simple consumption-savings problem where an agent maximizes:
+\[
+\sup_{\{c_t\}_{t=0}^{\infty}} \sum_{t=0}^{\infty} \beta^t u(c_t)
+\]
+subject to:
+\[
+k_{t+1} = Rk_t - c_t
+\]
+\[
+k_t \geq 0, c_t \geq 0 \text{ for all } t
+\]
+
+where $R = 1.05$ is the gross interest rate, $\beta = 0.95$ is the discount factor, and the utility function is:
+\[
+u(c) = \frac{c^{1-\theta} - 1}{1-\theta}
+\]
+with $\theta = 2$.
+
+a. (8 points) Implement value function iteration in Julia to solve this problem:
+   \begin{itemize}
+   \item Create a \texttt{BellmanProblem} struct containing the problem parameters
+   \item Define the utility function and constraint correspondence
+   \item Write the Bellman operator function
+   \item Implement the iterative solution method with a convergence criterion
+   \end{itemize}
+
+b. (8 points) Plot the following using any Julia plotting package:
+   \begin{itemize}
+   \item The converged value function
+   \item The policy function for consumption
+   \item The policy function for next period's capital
+   \end{itemize}
+
+c. (4 points) Extra points will be awarded for:
+   \begin{itemize}
+   \item Using multiple dispatch appropriately
+   \item Writing clear docstrings for functions
+   \item Using type annotations for variables
+   \item Making the code modular and reusable
+   \end{itemize}
+
+Implementation notes:
+\begin{itemize}
+\item Use a grid of 100 points for capital, ranging from 0 to 20
+\item Set convergence tolerance to $10^{-6}$
+\item Initialize the value function to zero
+\item Submit your code as a Julia script or Pluto notebook
+\end{itemize}
+
+Hints:
+\begin{itemize}
+\item Review the example code showing how to structure the Bellman iteration
+\item The Plots.jl package is recommended for visualization
+\item Test your code with a simpler utility function first
+\end{itemize}
+
+\end{document}
